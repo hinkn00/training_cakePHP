@@ -57,6 +57,7 @@
             <?php endif?>
             <td>
                 <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'edit', $product->id))?> class="btn btn-warning">Sửa</a>
+                <!-- Sửa lại nút xóa -->
                 <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $product->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $product->id), 'class' => 'btn btn-danger']) ?>
             </td>
         </tr>
