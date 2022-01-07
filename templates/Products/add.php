@@ -7,7 +7,7 @@
             <div class="card-body">
                 <?= $this->Form->create($product)?>
                 <div class="form-group">
-                    <?php echo $this->Form->label('Name'); ?>
+                    <?php echo $this->Form->label('Tên sản phẩm'); ?>
                     <?php echo $this->Form->text('p_name',['class'=>'form-control','required'=>false]); ?>
                 </div>
                 <div class="form-group">

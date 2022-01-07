@@ -60,7 +60,7 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/products/edit', ['controller' => 'Products', 'action' => 'edit']);
         $builder->connect('/products/delete', ['controller' => 'Products', 'action' => 'delete']);
         $builder->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
-        // $builder->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
+        $builder->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
 
         /*
          * Connect catchall routes for all controllers.

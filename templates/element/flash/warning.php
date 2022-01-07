@@ -9,3 +9,9 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 }
 ?>
 <div class="message warning" onclick="this.classList.add('hidden');"><?= $message ?></div>
+
+<script>
+    setTimeout(() => {
+        $('.message.warning').css("display",'none');
+    }, 3000);
+</script>

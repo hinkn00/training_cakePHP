@@ -8,7 +8,7 @@ class ProductsController extends AppController
         'limit' => '3',
     ];
     $products = $this->paginate($this->Products->find('all'));
-    $this->set('products', $products);
+    $this->set(['products'=>$products, 'title'=>'Quản lý sản phẩm']);
  }   
  public function add()
  {
@@ -23,7 +23,7 @@ class ProductsController extends AppController
         $this->Flash->error(__('Thêm sản phẩm chưa thành công. Hãy thử lại'));
 
      }
-     $this->set(compact('product'));
+     $this->set(['title'=>'Thêm sản phẩm', 'product'=>$product]);
  }
  public function edit($id = null)
  {
@@ -37,6 +37,7 @@ class ProductsController extends AppController
        $this->Flash->error(__('Sửa sản phẩm chưa thành công. Hãy thử lại'));
     }
     $this->set(array(
+        'title'=> 'Sản phẩm: '.$product->p_name, 
         'name'=>$product->p_name, 
         'detail'=>$product->p_detail, 
         'price'  => $product->p_price,
@@ -63,17 +64,18 @@ class ProductsController extends AppController
 public function deleteSelected()
 {
     $this->request->allowMethod(array('post','delete'));
-    $product = $this->Products->get('ids');
+    $product = $this->request->getData('ids');
     foreach($product as $value){
-        $deleteAll = $this->Products->deleteAll('id'->$value);
+        $this->Products->deleteAll(['id'=>$value]);
     }
-    if($deleteAll){
-        $this->Flash->success(__('Xóa sản phẩm thành công'));
-        return $this->redirect(['action'=>'index']);
-    } else{
-        $this->Flash->error(__('Xóa sản phẩm chưa thành công. Hãy thử lại'));
-    }
-    $this->set(array('product'=>$product));
+    return $this->redirect(['action'=>'index']);
+    // if($deleteAll){
+    //     $this->Flash->success(__('Xóa sản phẩm thành công'));
+    //     return $this->redirect(['action'=>'index']);
+    // } else{
+    //     $this->Flash->error(__('Xóa sản phẩm chưa thành công. Hãy thử lại'));
+    // }
+    // // $this->set(array('product'=>$product));
 }
  public function search()
  {
@@ -84,6 +86,6 @@ public function deleteSelected()
     $products = $this->paginate($this->Products->find()->where(function($exp, $query) use($search){
         return $exp->like('p_name', '%'.$search.'%');
     }));
-    $this->set('products', $products);
+    $this->set(['products'=> $products, 'title'=>'Kết quả tìm kiếm: '.$search]);
  }
 }

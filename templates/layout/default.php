@@ -21,20 +21,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));?>
     <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
+        <?php //$cakeDescription ?>
+        <?= $title ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
+    <?= $this->Html->script('jquery-3.2.1.min')?>
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake','bootstrap.min']) ?>
-    <?= $this->Html->script(['bootstrap.bundle.min','jquery.slim.min','popper.min','jquery-3.2.1.min'], array('block'=>'js')) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    
 </head>
 <body>
     <nav class="top-nav">
@@ -48,11 +48,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </nav>
     <main class="main">
         <div class="container">
+            <div class="message hidden"></div>
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
     </main>
     <footer>
     </footer>
+    
+    <?php //echo $this->fetch('script') ?>
 </body>
 </html>
