@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <form action="<?php echo $this->URL->build(['action'=>'search',])?>" method="get">
             <div class="input-group">
-                <input type="text" name="q" id="q" class="form-control" />
+                <input type="text" name="q" id="q" class="form-control" placeholder="Nhập tên sản phẩm ..."/>
                 <div class="iput-group-prepend">
                     <button class="btn btn-primary input-group-text" type="submit">
                         Tìm kiếm
