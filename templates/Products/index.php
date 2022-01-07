@@ -18,11 +18,16 @@
         <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'add'))?> class="btn btn-primary">Thêm sản phẩm</a>
     </div>
 </div>
-
+<form method="post">
+    <p>
+        <button type="submit" formaction="<?= $this->URL->build(['action'=>'deleteSelected'])?>" class="btn btn-danger">Chọn sản phẩm để xóa</button>
+    </p>
+</form>
 <table class="table table-bordered table-stripped mt-2">
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('id')?></th>
+            <th><?= $this->Paginator->sort('Ảnh sản phẩm')?></th>
             <th><?= $this->Paginator->sort('Tên sản phẩm')?></th>
             <th><?=$this->Paginator->sort('Chi tiết')?></th>
             <th><?=$this->Paginator->sort('Giá sản phẩm')?></th>

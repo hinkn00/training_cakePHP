@@ -60,7 +60,21 @@ class ProductsController extends AppController
     }
     $this->set(array('product'=>$product));
  }
-
+public function deleteSelected()
+{
+    $this->request->allowMethod(array('post','delete'));
+    $product = $this->Products->get('ids');
+    foreach($product as $value){
+        $deleteAll = $this->Products->deleteAll('id'->$value);
+    }
+    if($deleteAll){
+        $this->Flash->success(__('Xóa sản phẩm thành công'));
+        return $this->redirect(['action'=>'index']);
+    } else{
+        $this->Flash->error(__('Xóa sản phẩm chưa thành công. Hãy thử lại'));
+    }
+    $this->set(array('product'=>$product));
+}
  public function search()
  {
     $search = $this->request->getQuery('q');
