@@ -59,7 +59,17 @@ class ProductsController extends AppController
         $this->Flash->error(__('Xóa sản phẩm chưa thành công. Hãy thử lại'));
     }
     $this->set(array('product'=>$product));
+ }
 
-
+ public function search()
+ {
+    $search = $this->request->getQuery('q');
+    $this->paginate = [
+        'limit' => '3',
+    ];
+    $products = $this->paginate($this->Products->find()->where(function($exp, $query) use($search){
+        return $exp->like('p_name', '%'.$search.'%');
+    }));
+    $this->set('products', $products);
  }
 }

@@ -26,13 +26,10 @@
                     ]); ?>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->Form->label('Trạng thái'); ?>
-                    <?php echo $this->Form->select('p_status', [1=>"Hiện", 0=>'Ẩn'], [
-                        'empty' => '(Chọn trạng thái)'               
-                    ]); ?>
+                    <?php echo $this->Form->label('Thêm ảnh'); ?>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->Form->label('Trạng thái'); ?>
+                    <?php echo $this->Form->label('Trạng thái');?>
                     <input type="date" name="created_at" id="created_at">
                 </div>
 
