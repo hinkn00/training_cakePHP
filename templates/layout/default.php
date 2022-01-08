@@ -29,7 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-    <?= $this->Html->script('jquery-3.2.1.min')?>
+    <?= $this->Html->script(['jquery.min'])?>
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake','bootstrap.min']) ?>
 
     <?= $this->fetch('meta') ?>
@@ -39,11 +39,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+            <a href="<?= $this->Url->build('/') ?>"><span>Quản lý</span></a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'add'])?>">Đăng ký</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <a rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'add'])?>">Đăng ký</a>
+            <a rel="noopener" href="https://api.cakephp.org/">API</a>
         </div>
     </nav>
     <main class="main">
@@ -56,6 +56,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <footer>
     </footer>
     
-    <?php //echo $this->fetch('script') ?>
+    <?= $this->Html->script(['jquery.validate.min'])?>
 </body>
 </html>
