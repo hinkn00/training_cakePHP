@@ -28,10 +28,6 @@
                 <div class="form-group">
                     <?php echo $this->Form->label('Thêm ảnh'); ?>
                 </div>
-                <div class="form-group">
-                    <?php echo $this->Form->label('Trạng thái');?>
-                    <input type="date" name="created_at" id="created_at">
-                </div>
 
                 <?php echo $this->Form->Button('Thêm sản phẩm',['class'=>'btn btn-primary']); ?>
                 <?php echo $this->Html->link('Quay lại', array('controller' => 'products', 'action' => 'index', 'class'=>'btn btn-success')); ?>
