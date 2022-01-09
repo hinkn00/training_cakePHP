@@ -43,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="top-nav-links">
             <a rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'add'])?>">Đăng ký</a>
-            <a rel="noopener" href="https://api.cakephp.org/">API</a>
+            <a rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'login'])?>">Đăng nhập</a>
         </div>
     </nav>
     <main class="main">

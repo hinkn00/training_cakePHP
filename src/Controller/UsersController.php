@@ -8,7 +8,28 @@ use Cake\Mailer\TransportFactory;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Utility\Security;
 use Cake\ORM\TableRegistry;
+use Cake\Event\Event;
 class UsersController extends AppController{
+    public function login()
+    {
+        if($this->request->is('post')){
+            $user = $this->Auth->identify();
+            exit;
+            debug($user);
+            if($user){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else{
+                $this->Flash->error('Email hoặc mật khẩu không chính xác');
+            }
+        }
+
+        $this->set(['title'=>'Đăng nhập']);
+    }
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
     public function add()
     {
         if($this->request->is('post')){
@@ -19,7 +40,7 @@ class UsersController extends AppController{
             $hasher = new DefaultPassWordHasher();
             $yName = $this->request->getData('name');
             $yEmail = $this->request->getData('email');
-            $yPassword = Security::hash($this->request->getData('password'), 'sha256', false);
+            $yPassword = $this->request->getData('password');//convert sang hash bcrypt
             $yToken = Security::hash(Security::randomBytes(32));
 
             $user->u_name = $yName;
@@ -58,9 +79,13 @@ class UsersController extends AppController{
     {
         $userTable = TableRegistry::get('Users');//Lấy dữ liệu bảng uses
         $verify = $userTable->find()->where(['u_token'=>$token])->first();//lấy tất cả thông tin những token gửi vào
-        $verify->verified = '1';
+        if($verify->verified == 1){
+            return $this->redirect(['controller'=>'Products','action'=>'index']);
+        }else{
+            $verify->verified = '1';
 
-        $userTable->save($verify);
+            $userTable->save($verify);
+        }
         $this->set(['title'=>'Xác nhận tài khoản']);
     }
 }

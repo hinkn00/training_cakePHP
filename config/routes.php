@@ -62,6 +62,8 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
         $builder->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
 
+        $builder->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
+        $builder->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
         $builder->connect('/users/register', ['controller' => 'Users', 'action' => 'add']);
         $builder->connect('/users/verification', ['controller' => 'Users', 'action' => 'verification']);
 
