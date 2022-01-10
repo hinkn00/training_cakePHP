@@ -92,4 +92,52 @@ class UsersController extends AppController{
         }
         $this->set(['title'=>'Xác nhận tài khoản']);
     }
+
+public function resetPass($token)
+{
+    if ($this->request->is('post')) {
+        $haser = new DefaultPasswordHasher();
+        $yPass =$haser->hash($this->request->getData('password'));
+        $userTable = TableRegistry::get('Users');
+        $user = $userTable->find('all')->where(['u_token'=>$token])->first();
+        $user->u_password = $yPass;
+        if($userTable->save($user)){
+            return $this->redirect(['action'=>'login']);
+        }
+    }
+    $this->set('title','Đặt lại mật khẩu');
+}
+public function forgotPass()
+{
+    if($this->request->is('post')){
+        $yEmail = $this->request->getData('email');
+        $yToken = Security::hash(Security::randomBytes(32));
+
+        $userTable = TableRegistry::get('Users');
+        $user = $userTable->find('all')->where(['u_email'=>$yEmail])->first();
+        $user->u_password = '';
+        $user->u_token = $yToken;
+        if($userTable->save($user)){
+            $this->Flash->success('Mật khẩu sẽ được gửi vào email của bạn. Vui lòng kiểm tra hộp thư');
+
+            TransportFactory::setConfig('mailtrap', [
+                'host' => 'smtp.mailtrap.io',
+                'port' => 2525,
+                'username' => 'd914e017da3afe',
+                'password' => '1b4570676e5f28',
+                'className' => 'Smtp'
+            ]);
+
+            $mailer = new Mailer('default');
+                $mailer->setTransport('mailtrap');
+                $mailer->setEmailFormat('html')
+                        ->setSender('tungnt@mail.com','admin')
+                        ->setSubject('Lấy lại mật khẩu')
+                        ->setTo($yEmail)
+                        ->deliver('Xin chào, '.$yEmail.'<br/> Vui lòng nhấn <a href="http://localhost:8765/users/reset-pass/'.$yToken.'">tại đây</a> để lấy lại mật khẩu');
+            return $this->redirect(['action'=>'login']);
+        }
+    }
+    $this->set('title','Lấy lại mật khẩu');
+}
 }
