@@ -68,7 +68,9 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/users/verification', ['controller' => 'Users', 'action' => 'verification']);
         $builder->connect('/users/reset-pass', ['controller' => 'Users', 'action' => 'resetPass']);
         $builder->connect('/users/forgot-pass', ['controller' => 'Users', 'action' => 'forgotPass']);
-
+        
+        $builder->connect('/files', ['controller' => 'Files', 'action' => 'index']);
+        $builder->connect('/files/upload', ['controller' => 'Files', 'action' => 'upload']);
         /*
          * Connect catchall routes for all controllers.
          *

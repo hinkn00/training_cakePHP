@@ -62,6 +62,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <footer>
     </footer>
     
-    <?= $this->Html->script(['jquery.validate.min'])?>
+    <?= $this->Html->script(['jquery.validate.min','additional-methods.min'])?>
 </body>
 </html>
