@@ -54,12 +54,6 @@ class FilesController extends AppController{
     {
         $file = $this->Files->get($id);
         $path = WWW_ROOT.$file->path;
-        // $this->response->file(WWW_ROOT.$file->path, array(
-        //     'download' => true,
-        //     'name' => $file->name,
-        // ));
-        
-        // return $this->response;
 
         $response = $this->response->withFile(
             $path,

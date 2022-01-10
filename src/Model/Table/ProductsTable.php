@@ -56,7 +56,7 @@ class ProductsTable extends Table
 
         $validator
             ->scalar('p_name')
-            ->maxLength('p_name', 50)
+            ->maxLength('p_name', 255)
             ->requirePresence('p_name', 'create')
             ->notEmptyString('p_name');
 
@@ -72,13 +72,20 @@ class ProductsTable extends Table
             ->notEmptyString('p_price');
 
         $validator
+            ->scalar('p_image')
+            ->maxLength('p_image', 255)
+            ->requirePresence('p_image', 'create')
+            ->notEmptyFile('p_image');
+
+        $validator
             ->integer('p_status')
             ->requirePresence('p_status', 'create')
             ->notEmptyString('p_status');
 
         $validator
             ->date('created_at')
-            ->allowEmptyDate('created_at');
+            ->requirePresence('created_at', 'create')
+            ->notEmptyDate('created_at');
 
         return $validator;
     }

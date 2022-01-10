@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <form action="<?php echo $this->URL->build(['action'=>'search',])?>" method="get">
             <div class="input-group">
-                <input type="text" name="q" id="q" class="form-control" />
+                <input type="text" name="q" id="q" class="form-control" placeholder="Nhập tên sản phẩm ..."/>
                 <div class="iput-group-prepend">
                     <button class="btn btn-primary input-group-text" type="submit">
                         Tìm kiếm
@@ -19,10 +19,19 @@
     </div>
 </div>
 
+<?= $this->Form->create(null,[
+    'onsubmit'=>'return false',
+    "id"=>"deleteAll",
+    'action' => ''
+])?>
+<input type="hidden" name="_method" value="DELETE" />
+<?= $this->Form->Button('Xóa sản phẩm đã chọn',['class'=>'btn btn-danger'])?>
+<?= $this->Form->end()?>
 <table class="table table-bordered table-stripped mt-2">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('id')?></th>
+            <th><input type="checkbox" class="selectall"></th>
+            <th><?= $this->Paginator->sort('Ảnh sản phẩm')?></th>
             <th><?= $this->Paginator->sort('Tên sản phẩm')?></th>
             <th><?=$this->Paginator->sort('Chi tiết')?></th>
             <th><?=$this->Paginator->sort('Giá sản phẩm')?></th>
@@ -36,7 +45,8 @@
             foreach($products as $product):
         ?>
         <tr>
-            <td><?= $product->id?></td>
+            <td><input type="checkbox" class="selectbox" name="ids[]" value="<?= $product->id ?>" id=""></td>
+            <td><img src="../../upload/products/<?= $product->p_image?>" width="150" alt=""></td>
             <td><?= $product->p_name?></td>
             <td><?= $product->p_detail?></td>
             <td><?= $product->p_price?></td>
@@ -52,7 +62,7 @@
             <?php endif?>
             <td>
                 <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'edit', $product->id))?> class="btn btn-warning">Sửa</a>
-                <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $product->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $product->id), 'class' => 'btn btn-danger']) ?>
+                <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $product->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $product->p_name), 'class' => 'btn btn-danger']) ?>
             </td>
         </tr>
         <?php
@@ -71,17 +81,67 @@ $paginator = $this->Paginator->setTemplates([
     'nextDisabled' => '<li class="page-item"><a></a></li>'
 ]);
 ?>
+<ul class="pagination">
+    <?php
+        echo $paginator->first();
+        if($paginator->hasPrev()){
+            echo $paginator->prev();
+        }
+        echo $paginator->numbers();
+        if(!empty($paginator->next())){
+            echo $paginator->next();
+        }
+        echo $paginator->last();
+    ?>
+</ul>
 
-    <ul class="pagination">
-        <?php
-            echo $paginator->first();
-            if($paginator->hasPrev()){
-                echo $paginator->prev();
+<script type="text/javascript">
+    $(".selectall").click(function(){
+        $('.selectbox').prop('checked',$(this).prop('checked'));
+    })
+    $('.selectbox').click(function() {
+        var total = $('.selectbox').length;
+        var number = $('.selectbox:checked').length;
+        if(total == number){
+            $('.selectall').prop('checked',true);
+        }else{
+            $('.selectall').prop('checked',false);
+        }
+    })
+
+    $('#deleteAll button').click(function() {
+        let count = $('.selectbox:checked').length;
+        let ids = [];
+        $('.selectbox:checked').each(function(){
+            ids.push($(this).val())
+        })
+        if(count == 0){
+            $('.message').removeClass('hidden');
+            $('.message').addClass('error').html("Hãy chọn ít nhất 1 sản phẩm");
+
+            setTimeout(() => {
+                $('.message').removeClass('error').html("");
+                $('.message').addClass('hidden');
+            }, 3000);
+        } else{
+            if(confirm("Bạn có muốn xóa các sản phẩm này không?"))
+            {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrfToken"]').attr('content')
+                    },
+                    url: '/products/delete-selected',
+                    type:'DELETE',
+                    data: { "ids": ids },
+                    success: function(data) {
+                        $('.message').removeClass('hidden');
+                        $('.message').addClass('success').html('Xóa các sản phẩm thành công');
+                        setTimeout(() => {
+                            location.reload();
+                        }, 3000);
+                    }
+                });
             }
-            echo $paginator->numbers();
-            if(!empty($paginator->next())){
-                echo $paginator->next();
-            }
-            echo $paginator->last();
-        ?>
-    </ul>
+        }
+    })
+</script>

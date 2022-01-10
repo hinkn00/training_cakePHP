@@ -1,5 +1,7 @@
 <?php
 namespace App\Controller;
+use Cake\Utility\Security;
+
 class ProductsController extends AppController
 {
  public function index()
@@ -14,12 +16,23 @@ class ProductsController extends AppController
  {
      $product = $this->Products->newEmptyEntity();
      if($this->request->is('post')){
-         $product = $this->Products->patchEntity($product, $this->request->getData());
-         $product->created_at = date('Y-m-d');
-         if($this->Products->save($product)){
-             $this->Flash->success(__('Thêm sản phẩm thành công'));
-            return $this->redirect(['action'=>'index']);
-         }
+        $product = $this->Products->patchEntity($product, $this->request->getData());
+        if(!$product->getErrors){         
+            $image = $this->request->getData('file');
+            $tmp = $image->getStream()->getMetadata('uri'); // lấy tpm_name
+            $name = $image->getClientFilename();
+            $ex = substr(strrchr($name,"."),1);
+            $newNames = time()."_".$name;
+            // exit($newNames);
+            $path = "upload/products/".$newNames;
+            $product->p_image = $newNames;
+            move_uploaded_file($tmp, WWW_ROOT.$path);
+        }
+        $product->created_at = date('Y-m-d');
+        if($this->Products->save($product)){
+            $this->Flash->success(__('Thêm sản phẩm thành công'));
+        return $this->redirect(['action'=>'index']);
+        }
         $this->Flash->error(__('Thêm sản phẩm chưa thành công. Hãy thử lại'));
 
      }
@@ -30,6 +43,20 @@ class ProductsController extends AppController
     $product = $this->Products->get($id);
     if($this->request->is(array('post','put'))){
         $product = $this->Products->patchEntity($product, $this->request->getData());
+        if(!$product->getErrors){  
+            if($product->p_image){
+                unlink(WWW_ROOT."upload/products/".$product->p_image);
+            }
+            $image = $this->request->getData('file');
+            $tmp = $image->getStream()->getMetadata('uri'); // lấy tpm_name
+            $name = $image->getClientFilename();
+            $ex = substr(strrchr($name,"."),1);
+            $newNames = time()."_".$name;
+            // exit($newNames);
+            $path = "upload/products/".$newNames;
+            $product->p_image = $newNames;
+            move_uploaded_file($tmp, WWW_ROOT.$path);
+        }
         if($this->Products->save($product)){
             $this->Flash->success(__('Sửa sản phẩm thành công'));
            return $this->redirect(['action'=>'index']);
@@ -41,7 +68,7 @@ class ProductsController extends AppController
         'name'=>$product->p_name, 
         'detail'=>$product->p_detail, 
         'price'  => $product->p_price,
-        'status'  => $product->p_status,
+        'image'  => $product->p_image,
         'status'  => $product->p_status,
         'created_at'  => $product->created_at,
         'product'=>$product,
@@ -89,3 +116,5 @@ public function deleteSelected()
     $this->set(['products'=> $products, 'title'=>'Kết quả tìm kiếm: '.$search]);
  }
 }
+
+

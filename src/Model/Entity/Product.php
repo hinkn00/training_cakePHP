@@ -12,8 +12,9 @@ use Cake\ORM\Entity;
  * @property string $p_name
  * @property string $p_detail
  * @property int $p_price
+ * @property string $p_image
  * @property int $p_status
- * @property \Cake\I18n\FrozenDate|null $created_at
+ * @property \Cake\I18n\FrozenDate $created_at
  */
 class Product extends Entity
 {
@@ -30,6 +31,7 @@ class Product extends Entity
         'p_name' => true,
         'p_detail' => true,
         'p_price' => true,
+        'p_image' => true,
         'p_status' => true,
         'created_at' => true,
     ];
