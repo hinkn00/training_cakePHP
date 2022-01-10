@@ -12,9 +12,12 @@
         <div class="card">
             <img src="<?= $file->path;?>" alt="" class="card-img-top">
             <div class="card-body">    
-                <div class="card-title">
-                    <h4><?= $file->name?></h4>
-                </div>
+                <h4 class="card-title"><?= $file->name?></h4>
+
+                <?php
+                    echo $this->Html->link('Download',['action'=>'download', $file->id],['class'=>'btn btn-primary']);
+                    echo $this->Html->link('Xóa',['action'=>'delete', $file->id],['class'=>'btn btn-danger ml-2']);
+                ?>
             </div>
 
         </div>

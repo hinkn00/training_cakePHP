@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Utility\Security;
+use Cake\Http\Response;
 class FilesController extends AppController{
 
     public function initialize(): void
@@ -14,7 +15,7 @@ class FilesController extends AppController{
     {
         $file = $this->Files->find('all');
 
-        $this->set(array('files' => $file, 'title'=>'Tải ảnh'));
+        $this->set(array('files' => $file, 'title'=>'Quản lý ảnh'));
     }
 
     public function upload()
@@ -37,4 +38,38 @@ class FilesController extends AppController{
 
         $this->set(array('title'=>'Tải ảnh'));
     }
+
+    public function delete($id = null)
+    {
+        $file = $this->Files->get($id);
+
+        $path = WWW_ROOT.$file->path;
+        if(unlink($path)){
+            $this->Files->delete($file);
+            return $this->redirect(['action'=>'index']);
+        }
+    }
+
+    public function download($id = null)
+    {
+        $file = $this->Files->get($id);
+        $path = WWW_ROOT.$file->path;
+        // $this->response->file(WWW_ROOT.$file->path, array(
+        //     'download' => true,
+        //     'name' => $file->name,
+        // ));
+        
+        // return $this->response;
+
+        $response = $this->response->withFile(
+            $path,
+            ['download' => true, 'name' => $file->name]
+        );
+        return $response;
+        if($response){
+            return $this->redirect(['action'=>'index']);
+        }
+
+    }
+
 }
