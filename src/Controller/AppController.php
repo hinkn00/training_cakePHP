@@ -47,16 +47,16 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Auth',[
             'authenticate' => [
-                // 'Form' => [
-                //     'fields' => ['username'=>'email','password'=>'password'],
-                //     'scope' => ['verified'=>'1'],
-                //     'userModel' => 'Users'
-                // ]
+                'Form' => [
+                    'fields' => ['username'=>'u_email','password'=>'u_password'],
+                    'scope' => ['verified'=>1],
+                    'userModel' => 'Users'
+                ]
             ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login',
-            ],
+            // 'loginAction' => [
+            //     'controller' => 'Users',
+            //     'action' => 'login',
+            // ],
             'loginRedirect' => [
                 'controller' => 'Products',
                 'action' => 'index'
