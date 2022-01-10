@@ -2,7 +2,7 @@
     <div class="col-md-4 offset-md-4">
         <?=$this->Flash->render()?>
         <div class="card">
-            <div class="card-header text-center">Đăng nhập</div>
+            <div class="card-header text-center"><h1>Đăng nhập</h1></div>
             <div class="card-body">
             <?php
                 echo $this->Form->create(null,['id'=>'frmLogin', 'onsubmit'=>'return false']);

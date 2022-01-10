@@ -15,8 +15,14 @@ class UsersController extends AppController{
         if($this->request->is('post')){
             $user = $this->Auth->identify();
             if($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                if(empty($user['verified'])){
+                    $this->Flash->error('Tài khoản bạn chưa được kích hoạt.');
+                    $this->Flash->error('Vui lòng kiểm tra lại email để kích hoạt.');
+                    return $this->redirect(['action'=>'login']);
+                } else{
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
             } else{
                 $this->Flash->error('Email hoặc mật khẩu không chính xác');
             }

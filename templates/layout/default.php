@@ -42,8 +42,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Quản lý</span></a>
         </div>
         <div class="top-nav-links">
-            <a rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'add'])?>">Đăng ký</a>
-            <a rel="noopener" href="<?= $this->Url->build(['controller'=>'Users', 'action'=>'login'])?>">Đăng nhập</a>
+        <?php 
+            if(!empty($_SESSION['Auth']['User'])):
+        ?>
+        <?= $this->HTML->Link('Đăng xuất',['controller'=>'Users','action'=>'logout'])?>
+        <?php else:?>
+        <?= $this->HTML->Link('Đăng ký',['controller'=>'Users','action'=>'register'])?>
+        <?= $this->HTML->Link('Đăng nhập',['controller'=>'Users','action'=>'login'])?>
+        <?php endif;?>
         </div>
     </nav>
     <main class="main">

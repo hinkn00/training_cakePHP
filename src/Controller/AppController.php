@@ -49,7 +49,7 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username'=>'u_email','password'=>'u_password'],
-                    'scope' => ['verified'=>1],
+                    'scope' => ['verified'=> '1'],
                     'userModel' => 'Users'
                 ]
             ],
