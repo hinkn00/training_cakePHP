@@ -3,7 +3,8 @@
     // echo $this->Html->Link('Tải ảnh',['action'=>'upload'], ['class'=>'btn btn-primary']);
 ?>
 </p>
-
+<h1>Danh sách sản phẩm</h1>
+<br>
 <div class="row">
     <?php foreach($products as $product):?>
   <div class="col-sm-3">

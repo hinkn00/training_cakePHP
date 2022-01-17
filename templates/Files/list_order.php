@@ -3,21 +3,12 @@
         <h3>Danh sách đã đặt</h3>
     </div>
     <div class="col-md-6">
-        <form action="<?php echo $this->Url->build(['action'=>'search',])?>" method="get">
-            <div class="input-group">
-                <input type="text" name="q" id="q" class="form-control" placeholder="Nhập sản phẩm đã đặt ..."/>
-                <div class="iput-group-prepend">
-                    <button class="btn btn-primary input-group-text" type="submit">
-                        Tìm kiếm
-                    </button>
-                </div>
-            </div>
-        </form>
+        <input type="text" name="q" id="q" class="form-control" placeholder="Nhập sản phẩm đã đặt ..."/>
     </div>
     <div class="col-md-3 text-right">
         <a href=<?= $this->Url->build(array('controller'=>'Files','action' => 'index'))?> class="btn btn-primary">Xem thêm sản phẩm</a>
     </div>
-    <table class="table table-bordered table-stripped mt-2">
+    <table class="table table-bordered table-stripped mt-2" id="myTable">
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('Ảnh sản phẩm')?></th>
@@ -49,7 +40,7 @@
                 <td><?= $order->create_at->format('Y-m-d') ?></td>
             <?php endif?>
             <td>
-                <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'edit', $order->id))?> class="btn btn-warning">Sửa</a>
+                <!-- <a href=<?php //echo $this->URL->build(array('controller'=>'Files','action' => 'edit', $order->id))?> class="btn btn-warning">Sửa</a> -->
                 <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $order->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $order->id), 'class' => 'btn btn-danger']) ?>
             </td>
         </tr>
@@ -59,3 +50,16 @@
     </tbody>
 </table>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#q').on('keyup', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var tukhoa = $(this).val().toLowerCase();
+            $('#myTable tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(tukhoa)>-1);
+            });
+        });
+    });
+</script>

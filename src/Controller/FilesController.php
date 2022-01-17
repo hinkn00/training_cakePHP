@@ -41,29 +41,39 @@ class FilesController extends AppController{
         // }
 
         // $this->set(array('title'=>'Tải ảnh'));
-        $product = $this->Products->find()->where(['id',$id])->first();
-        if($product){
+        if($id){
             $orderTable = TableRegistry::get('Orders');
             $order = $orderTable->newEmptyEntity();
             $order->id_user = $this->Auth->User('id');
-            $order->id_product = $product->id;
+            $order->id_product = $id;
             $order->create_at = date('Y-m-d');
             if($orderTable->save($order)){
-                echo 'thanh cong';
-                exit;
+                $this->Flash->success('Đặt hàng thành công');
+                return $this->redirect(['action'=>'listOrder']);
             }
+        } else{
+            echo 'khong co don hang';
+            exit;
         }
         
     }
-
     public function delete($id = null)
     {
-        $file = $this->Files->get($id);
+        // $file = $this->Files->get($id);
 
-        $path = WWW_ROOT.$file->path;
-        if(unlink($path)){
-            $this->Files->delete($file);
-            return $this->redirect(['action'=>'index']);
+        // $path = WWW_ROOT.$file->path;
+        // if(unlink($path)){
+        //     $this->Files->delete($file);
+        //     return $this->redirect(['action'=>'index']);
+        // }
+
+        $this->request->allowMethod(['post','delete']);
+        $order = $this->Orders->get($id);
+        if($this->Orders->delete($order)){
+            $this->Flash->success(__('Xóa đơn hàng thành công'));
+            return $this->redirect(['action'=>'listOrder']);
+        }else{
+            $this->Flash->error(__('Xóa đơn hàng chưa thành công. Hãy thử lại'));
         }
     }
     public function listOrder()
