@@ -69,8 +69,9 @@ class FilesController extends AppController{
     public function listOrder()
     {
         $orders = $this->Orders->find();
+        $products = $this->Products->find();
 
-        $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders]);
+        $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products]);
     }
     // public function download($id = null)
     // {
