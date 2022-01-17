@@ -13,7 +13,11 @@
       <div class="card-body">
         <h5 class="card-title"><?=$product->p_name?></h5>
         <p class="card-text"><?=$product->p_detail?></p>
-        <a href="<?= $this->Url->build(['controller'=>'Files','action'=>'upload', $product->id])?>" class="btn btn-primary">Đặt hàng</a>
+        <?php if(!isset($_SESSION['Auth']['user'])):?>
+          <a href="<?= $this->Url->build(['controller'=>'Users','action'=>'login'])?>" class="btn btn-primary">Đặt hàng</a>
+        <?php else:?>
+          <a href="<?= $this->Url->build(['controller'=>'Files','action'=>'upload', $product->id])?>" class="btn btn-primary">Đặt hàng</a>
+        <?php endif?>
       </div>
     </div>
   </div>
