@@ -79,6 +79,8 @@ class AppController extends Controller
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $this->Auth->allow(['add', 'verification', 'logout','forgotPass','resetPass']);        
+        // $this->Auth->allow(['add', 'verification', 'logout','forgotPass','resetPass']);
+        $this->Auth->allow();
+
     }
 }
