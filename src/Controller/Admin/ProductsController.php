@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 use Cake\Utility\Security;
 
 class ProductsController extends AppController

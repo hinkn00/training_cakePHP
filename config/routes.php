@@ -55,12 +55,12 @@ return static function (RouteBuilder $routes) {
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
          */
-        $builder->connect('/products', ['controller' => 'Products', 'action' => 'index']);
-        $builder->connect('/products/add', ['controller' => 'Products', 'action' => 'add']);
-        $builder->connect('/products/edit', ['controller' => 'Products', 'action' => 'edit']);
-        $builder->connect('/products/delete', ['controller' => 'Products', 'action' => 'delete']);
-        $builder->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
-        $builder->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
+        // $builder->connect('/products', ['controller' => 'Products', 'action' => 'index']);
+        // $builder->connect('/products/add', ['controller' => 'Products', 'action' => 'add']);
+        // $builder->connect('/products/edit', ['controller' => 'Products', 'action' => 'edit']);
+        // $builder->connect('/products/delete', ['controller' => 'Products', 'action' => 'delete']);
+        // $builder->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
+        // $builder->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
 
         $builder->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
         $builder->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
@@ -88,7 +88,20 @@ return static function (RouteBuilder $routes) {
          */
         $builder->fallbacks();
     });
-
+    // Admin Route
+    $routes->prefix('admin', function (RouteBuilder $routes) {
+        // All routes here will be prefixed with `/admin`, and
+        // have the `'prefix' => 'Admin'` route element added that
+        // will be required when generating URLs for these routes
+        $routes->connect('/', ['controller' => 'Products', 'action' => 'index']);
+        $routes->connect('admin/products', ['controller' => 'Products', 'action' => 'index']);
+        $routes->connect('admin/products/add', ['controller' => 'Products', 'action' => 'add']);
+        $routes->connect('admin/products/edit', ['controller' => 'Products', 'action' => 'edit']);
+        $routes->connect('admin/products/delete', ['controller' => 'Products', 'action' => 'delete']);
+        $routes->connect('admin/products/search', ['controller' => 'Products', 'action' => 'search']);
+        $routes->connect('admin/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
+        $routes->fallbacks(DashedRoute::class);
+    });
     /*
      * If you need a different set of middleware or none at all,
      * open new scope and define routes there.

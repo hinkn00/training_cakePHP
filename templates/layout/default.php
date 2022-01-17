@@ -39,7 +39,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Quản lý</span></a>
+            <a href="<?= $this->Url->build('/') ?>"><span>Trang chủ</span></a>
         </div>
         <div class="top-nav-links">
         <?php 
