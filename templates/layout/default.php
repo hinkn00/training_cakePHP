@@ -46,6 +46,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             if(!empty($_SESSION['Auth']['User'])):
         ?>
         <?= $this->HTML->Link('Đăng xuất',['controller'=>'Users','action'=>'logout'])?>
+        <?= $this->HTML->Link('Đăng xuất',['controller'=>'Users','action'=>'logout'])?>
         <?php else:?>
         <?= $this->HTML->Link('Đăng ký',['controller'=>'Users','action'=>'register'])?>
         <?= $this->HTML->Link('Đăng nhập',['controller'=>'Users','action'=>'login'])?>

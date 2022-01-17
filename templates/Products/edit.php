@@ -44,9 +44,6 @@
 
 <script>
     $().ready(function(){
-        var img = document.getElementById('img');
-
-        img.src = URL.createObjectURL("upload/products/".<?= $image ?>);
 
         $('#frmEdit').validate({
             onfocusout: false,

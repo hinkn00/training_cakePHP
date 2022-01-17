@@ -46,7 +46,7 @@
         ?>
         <tr>
             <td><input type="checkbox" class="selectbox" name="ids[]" value="<?= $product->id ?>" id=""></td>
-            <td><img src="./upload/products/<?= $product->p_image?>" width="150" alt=""></td>
+            <td><img src="../upload/products/<?= $product->p_image?>" width="150" alt=""></td>
             <td><?= $product->p_name?></td>
             <td><?= $product->p_detail?></td>
             <td><?= $product->p_price?></td>

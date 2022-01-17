@@ -50,7 +50,7 @@ return static function (RouteBuilder $routes) {
          * its action called 'display', and we pass a param to select the view file
          * to use (in this case, templates/Pages/home.php)...
          */
-        $builder->connect('/', ['controller' => 'Products', 'action' => 'index']);
+        $builder->connect('/', ['controller' => 'Files', 'action' => 'index']);
 
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
@@ -69,10 +69,10 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/users/reset-pass', ['controller' => 'Users', 'action' => 'resetPass']);
         $builder->connect('/users/forgot-pass', ['controller' => 'Users', 'action' => 'forgotPass']);
         
-        $builder->connect('/files', ['controller' => 'Files', 'action' => 'index']);
-        $builder->connect('/files/upload', ['controller' => 'Files', 'action' => 'upload']);
-        $builder->connect('/files/delete', ['controller' => 'Files', 'action' => 'delete']);
-        $builder->connect('/files/download', ['controller' => 'Files', 'action' => 'download']);
+        $builder->connect('/list', ['controller' => 'Files', 'action' => 'index']);
+        $builder->connect('/order', ['controller' => 'Files', 'action' => 'upload']);
+        $builder->connect('/list/order', ['controller' => 'Files', 'action' => 'listOrder']);
+        $builder->connect('/list/order/delete', ['controller' => 'Files', 'action' => 'delete']);
         /*
          * Connect catchall routes for all controllers.
          *
