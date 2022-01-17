@@ -3,7 +3,7 @@
         <h3>Quản lý sản phẩm</h3>
     </div>
     <div class="col-md-6">
-        <form action="<?php echo $this->URL->build(['action'=>'search',])?>" method="get">
+        <form action="<?php echo $this->Url->build(['action'=>'search',])?>" method="get">
             <div class="input-group">
                 <input type="text" name="q" id="q" class="form-control" placeholder="Nhập tên sản phẩm ..."/>
                 <div class="iput-group-prepend">
@@ -15,7 +15,7 @@
         </form>
     </div>
     <div class="col-md-3 text-right">
-        <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'add'))?> class="btn btn-primary">Thêm sản phẩm</a>
+        <a href=<?= $this->Url->build(array('controller'=>'Products','action' => 'add'))?> class="btn btn-primary">Thêm sản phẩm</a>
     </div>
 </div>
 
@@ -61,7 +61,7 @@
                 <td><?= $product->created_at->format('Y-m-d') ?></td>
             <?php endif?>
             <td>
-                <a href=<?= $this->URL->build(array('controller'=>'Products','action' => 'edit', $product->id))?> class="btn btn-warning">Sửa</a>
+                <a href=<?= $this->Url->build(array('controller'=>'Products','action' => 'edit', $product->id))?> class="btn btn-warning">Sửa</a>
                 <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $product->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $product->p_name), 'class' => 'btn btn-danger']) ?>
             </td>
         </tr>

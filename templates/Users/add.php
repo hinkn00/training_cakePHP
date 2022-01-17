@@ -31,7 +31,7 @@
                 <div class="text-center">
                     <?php
                         echo $this->Form->Button('Đăng ký',['class'=>'btn btn-primary']);
-                        echo $this->HTML->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-success ml-3']);
+                        echo $this->Html->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-success ml-3']);
                     ?>
                 </div>
                 <?php

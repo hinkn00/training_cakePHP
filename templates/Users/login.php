@@ -19,8 +19,8 @@
             </div>
             <?php
                 echo $this->Form->Button('Đăng nhập',['class'=>'btn btn-primary mr-3']);
-                echo $this->HTML->link("Đăng ký ngay", ['action'=>'add'],['class'=>'btn btn-success']);
-                echo $this->HTML->link("Lấy lại mật khẩu", ['action'=>'forgotPass'],['class'=>'btn btn-info ml-3']);
+                echo $this->Html->link("Đăng ký ngay", ['action'=>'add'],['class'=>'btn btn-success']);
+                echo $this->Html->link("Lấy lại mật khẩu", ['action'=>'forgotPass'],['class'=>'btn btn-info ml-3']);
                 echo $this->Form->end();
             ?>
             </div>

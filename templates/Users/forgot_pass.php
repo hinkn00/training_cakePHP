@@ -13,8 +13,8 @@
                 <?= $this->Form->control('Email',['class'=>'form-control mb-2', 'name'=>'email', 'autofocus'])?>
                 <?= $this->Form->Button('Lấy lại mật khẩu',['class'=>'btn btn-primary mr-2'])?>
                 <?php
-                    echo $this->HTML->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-info mr-1']);
-                    echo $this->HTML->link("Đăng ký ngay", ['action'=>'add'],['class'=>'btn btn-success']);
+                    echo $this->Html->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-info mr-1']);
+                    echo $this->Html->link("Đăng ký ngay", ['action'=>'add'],['class'=>'btn btn-success']);
                 ?>
                 <?= $this->Form->end()?>
             </div>
