@@ -14,6 +14,7 @@
             <th><?= $this->Paginator->sort('Ảnh sản phẩm')?></th>
             <th><?= $this->Paginator->sort('Tên sản phẩm')?></th>
             <th><?=$this->Paginator->sort('Giá sản phẩm')?></th>
+            <th><?=$this->Paginator->sort('Số lượng')?></th>
             <th><?= $this->Paginator->sort('Người đặt')?></th>
             <th><?=$this->Paginator->sort('Ngày tạo')?></th>
             <th width="160">Khác</th>
@@ -31,6 +32,7 @@
                     <td><?= $product->p_price ?></td>
                 <?php endif?>
             <?php endforeach?>
+            <td><?= $order->quantity ?></td>
             <?php if($_SESSION['Auth']['User']['id'] == $order->id_user):?>
                 <td><?= $_SESSION['Auth']['User']['u_name'] ?></td>
             <?php endif?>

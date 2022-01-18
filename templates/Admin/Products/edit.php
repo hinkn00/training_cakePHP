@@ -28,7 +28,7 @@
 
                 <div class="form-group" style="margin: 15px 0">
                     <h3><strong>Ảnh hiện tại</strong></h3>
-                    <img src="../../upload/products/<?= $image?>" width="350">
+                    <img src="../upload/products/<?= $image?>" width="350">
                 </div>
                 <div class="form-group">
                     <?php echo $this->Form->label('Thêm ảnh'); ?>

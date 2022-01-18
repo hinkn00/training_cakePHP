@@ -12,6 +12,7 @@ class FilesController extends AppController{
         parent::initialize();
         $this->loadModel('Products');
         $this->loadModel('Orders');
+        $this->viewBuilder()->setLayout('client');
     }
     public function index()
     {
@@ -22,7 +23,7 @@ class FilesController extends AppController{
         $this->set(['products'=>$products, 'title'=>'Sản phẩm hiện có']);
     }
 
-    public function upload($id = null)
+    public function upload()
     {
         // if($this->request->is('post')){
         //     $image = $this->request->getData('file');
@@ -41,11 +42,13 @@ class FilesController extends AppController{
         // }
 
         // $this->set(array('title'=>'Tải ảnh'));
+        $id = $this->request->getData('id');
         if($id){
             $orderTable = TableRegistry::get('Orders');
             $order = $orderTable->newEmptyEntity();
             $order->id_user = $this->Auth->User('id');
             $order->id_product = $id;
+            $order->quantity = $this->request->getData('quantity');
             $order->create_at = date('Y-m-d');
             if($orderTable->save($order)){
                 $this->Flash->success('Đặt hàng thành công');

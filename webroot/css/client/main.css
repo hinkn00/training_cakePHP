@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    color: red;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80vw;
+    padding: 2px;
+    margin: 0 auto 2rem;
+    margin-top: 5px;
+
+}
+form#frmOrder{
+    margin-left: 3em;
+}
+.card{
+    max-width: 250px;
+}
+.card:first-child{
+    left: 3rem;
+}
+
+.card #quantity{
+    width: 50px;
+    margin-right: 20px;
+    padding-left: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}

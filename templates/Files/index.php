@@ -3,24 +3,33 @@
     // echo $this->Html->Link('Tải ảnh',['action'=>'upload'], ['class'=>'btn btn-primary']);
 ?>
 </p>
-<h1>Danh sách sản phẩm</h1>
-<br>
+<hr style="width: 25vw">
+<h1 class="title text-center">Danh sách sản phẩm</h1>
+<hr style="width: 25vw">
 <div class="row">
-    <?php foreach($products as $product):?>
-  <div class="col-sm-3">
-    <div class="card" style="margin-bottom: 15px;">
-        <img class="card-img-top" height="150px" width="150px" src="./upload/products/<?= $product->p_image?>" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title"><?=$product->p_name?></h5>
-        <p class="card-text"><?=$product->p_detail?></p>
-        <?php if(!isset($_SESSION['Auth']['user'])):?>
-          <a href="<?= $this->Url->build(['controller'=>'Users','action'=>'login'])?>" class="btn btn-primary">Đặt hàng</a>
-        <?php else:?>
-          <a href="<?= $this->Url->build(['controller'=>'Files','action'=>'upload', $product->id])?>" class="btn btn-primary">Đặt hàng</a>
-        <?php endif?>
+  <?php foreach($products as $product):?>
+      <div class="col-sm-3">
+      <?= $this->Form->create(null,[
+        'controller'=>'Files',
+        'action' => 'order',
+        'id' => 'frmOrder'
+      ])?>
+        <div class="card" style="margin-bottom: 15px;">
+            <img class="card-img-top" height="150px" width="150px" src="./upload/products/<?= $product->p_image?>" alt="Card image cap">
+          <div class="card-body">
+            <input type="hidden" name="id" value="<?=$product->id?>">
+            <h5 class="card-title"><?=$product->p_name?></h5>
+            <p class="card-text"><?=$product->p_detail?></p>
+            <input type="number" name="quantity" min="1" id="quantity" value="1">
+            <?php if(!isset($_SESSION['Auth'])):?>
+              <a href="<?= $this->Url->build(['controller'=>'Users','action'=>'login'])?>" class="btn btn-primary">Đặt hàng</a>
+            <?php else:?>
+              <a><button  class="btn btn-primary">Đặt hàng</button></a>
+            <?php endif?>
+          </div>
+        </div>
+      <?= $this->Form->end()?>
       </div>
-    </div>
-  </div>
   <?php endforeach;?>
 </div>
     <?php
@@ -34,7 +43,7 @@ $paginator = $this->Paginator->setTemplates([
     'nextDisabled' => '<li class="page-item"><a></a></li>'
 ]);
 ?>
-<ul class="pagination">
+<ul class="pagination" style="justify-content: center;">
     <?php
         echo $paginator->first();
         if($paginator->hasPrev()){

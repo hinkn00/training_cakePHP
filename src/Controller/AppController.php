@@ -68,7 +68,6 @@ class AppController extends Controller
             // 'storage' => 'Session',
             'authError' => 'Vui lòng đăng nhập trước khi truy cập',
         ]);
-        // $this->Auth->allow('register','login','verification');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -79,8 +78,6 @@ class AppController extends Controller
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        // $this->Auth->allow(['add', 'verification', 'logout','forgotPass','resetPass']);
-        $this->Auth->allow();
-
+        // $this->Auth->allow();
     }
 }
