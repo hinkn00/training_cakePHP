@@ -27,12 +27,14 @@ form#frmOrder{
     margin-left: 3em;
 }
 .card{
-    max-width: 250px;
+    width: 250px;
 }
 .card:first-child{
     left: 3rem;
 }
-
+.card.user{
+    width: calc(700px - 250px);
+}
 .card #quantity{
     width: 50px;
     margin-right: 20px;

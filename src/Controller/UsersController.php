@@ -8,8 +8,16 @@ use Cake\Mailer\TransportFactory;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Utility\Security;
 use Cake\ORM\TableRegistry;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 class UsersController extends AppController{
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->viewBuilder()->setLayout('client');
+        $this->loadModel('Users');
+
+    }
     public function login()
     {
         if($this->request->is('post')){
@@ -32,7 +40,9 @@ class UsersController extends AppController{
     }
     public function logout()
     {
-        return $this->redirect($this->Auth->logout());
+        // return $this->redirect($this->Auth->logout());
+        session_destroy();
+        return $this->redirect(['action'=>'login']);
     }
     public function add()
     {
@@ -41,7 +51,7 @@ class UsersController extends AppController{
 
             $user = $userTable->newEmptyEntity();
 
-            $hasher = new DefaultPassWordHasher();
+            // $hasher = new DefaultPassWordHasher();
             $yName = $this->request->getData('name');
             $yEmail = $this->request->getData('email');
             $yPassword = $this->request->getData('password');//convert sang hash bcrypt
@@ -49,7 +59,7 @@ class UsersController extends AppController{
 
             $user->u_name = $yName;
             $user->u_email = $yEmail;
-            $user->u_password = $hasher->hash($yPassword);
+            $user->u_password = md5($yPassword);//$hasher->hash($yPassword);
             $user->u_token = $yToken;
             $user->created_at = date("Y-m-d");
             $user->updated_at = date("Y-m-d");

@@ -2,7 +2,7 @@
     <div class="col-md-6 offset-md-4">
         <?= $this->Flash->render() ?>
         <div id="message"></div>
-        <div class="card">
+        <div class="card user">
             <h3 class="card-header">Đăng ký tài khoản</h3>
             <div class="card-body">
                 <?php

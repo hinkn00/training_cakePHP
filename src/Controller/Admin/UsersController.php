@@ -9,7 +9,7 @@ use Cake\Mailer\TransportFactory;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Utility\Security;
 use Cake\ORM\TableRegistry;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 class UsersController extends AppController{
     public function login()
     {
@@ -21,8 +21,12 @@ class UsersController extends AppController{
                     $this->Flash->error('Vui lòng kiểm tra lại email để kích hoạt.');
                     return $this->redirect(['action'=>'login']);
                 } else{
-                    $this->Auth->setUser($user);
-                    return $this->redirect($this->Auth->redirectUrl());
+                    if($user['role'] == 0){
+                        $this->Flash->error('Tài khoản không đúng');
+                    }else{
+                        $this->Auth->setUser($user);
+                        return $this->redirect($this->Auth->redirectUrl());
+                    }
                 }
             } else{
                 $this->Flash->error('Email hoặc mật khẩu không chính xác');

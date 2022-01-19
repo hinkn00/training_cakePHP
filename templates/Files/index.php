@@ -1,6 +1,7 @@
 <p>
 <?php
     // echo $this->Html->Link('Tải ảnh',['action'=>'upload'], ['class'=>'btn btn-primary']);
+    session_start();
 ?>
 </p>
 <hr style="width: 25vw">

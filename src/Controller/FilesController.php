@@ -81,10 +81,14 @@ class FilesController extends AppController{
     }
     public function listOrder()
     {
-        $orders = $this->Orders->find();
-        $products = $this->Products->find();
+        if($this->Auth->user()){
+            $orders = $this->Orders->find();
+            $products = $this->Products->find();
 
-        $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products]);
+            $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products]);
+        } else{
+            return $this->redirect(['controller'=>'Users','action'=>'login']);
+        }
     }
     // public function download($id = null)
     // {

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <?=$this->Flash->render()?>
-        <div class="card">
+        <div class="card user">
             <div class="card-header text-center"><h1>Đăng nhập</h1></div>
             <div class="card-body">
             <?php

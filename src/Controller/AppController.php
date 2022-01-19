@@ -78,6 +78,6 @@ class AppController extends Controller
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        // $this->Auth->allow();
+        $this->Auth->allow();
     }
 }

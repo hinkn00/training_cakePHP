@@ -1,9 +1,18 @@
 <?php
 namespace App\Controller\Admin;
 use Cake\Utility\Security;
-
+use Cake\Event\EventInterface;
 class ProductsController extends AppController
 {
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        if($this->Auth->user('role') != 1){
+            return $this->redirect('/');
+        }
+
+    }
  public function index()
  {
     $this->paginate = [
