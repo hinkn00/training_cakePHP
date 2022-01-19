@@ -15,7 +15,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->Form->label('Sản phẩm'); ?>
+                    <?php echo $this->Form->label('Người đặt'); ?>
                     <select name="id_user" id="id_user" style = "fone-size: 20px">
                         <?php foreach($users as $user):?>
                             <option value="<?= $user->id?>"><?= "Tên: ".$user->u_name . " -- Email: " . $user->u_email?></option>
