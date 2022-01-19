@@ -130,7 +130,7 @@ $paginator = $this->Paginator->setTemplates([
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrfToken"]').attr('content')
                     },
-                    url: '/products/delete-selected',
+                    url: 'admin/products/delete-selected',
                     type:'DELETE',
                     data: { "ids": ids },
                     success: function(data) {

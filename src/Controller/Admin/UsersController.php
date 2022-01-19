@@ -11,6 +11,16 @@ use Cake\Utility\Security;
 use Cake\ORM\TableRegistry;
 use Cake\Event\EventInterface;
 class UsersController extends AppController{
+    public function index()
+    {
+        $this->paginate = [
+            'limit' => '10'
+        ];
+
+
+        $users = $this->paginate($this->Users->find());
+        $this->set(['title'=>'Quản lý Users','users'=>$users]);
+    }
     public function login()
     {
         if($this->request->is('post')){
@@ -37,6 +47,7 @@ class UsersController extends AppController{
     }
     public function logout()
     {
+        // session_destroy();
         return $this->redirect($this->Auth->logout());
     }
     public function add()
@@ -56,6 +67,7 @@ class UsersController extends AppController{
             $user->u_email = $yEmail;
             $user->u_password = $hasher->hash($yPassword);
             $user->u_token = $yToken;
+            $user->role = 0;
             $user->created_at = date("Y-m-d");
             $user->updated_at = date("Y-m-d");
 
@@ -83,6 +95,40 @@ class UsersController extends AppController{
             }
         }
         $this->set(['title'=>'Đăng ký tài khoản']);
+    }
+
+    public function edit($id = null)
+    {
+        $user = $this->Users->get($id);
+        if($this->request->is(['post','put'])){
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if($this->Users->save($user)){
+                $this->Flash->success(__('Cập nhật thành công!'));
+               return $this->redirect(['action'=>'index']);
+            }
+           $this->Flash->error(__('Cập nhật chưa thành công. Hãy thử lại'));
+        }
+        $this->set([
+            'title'=>'Sửa thông tin của '.$user->u_name,
+            'name' => $user->u_name,
+            'email' => $user->u_email,
+            'verified' => $user->verified,
+            'role' => $user->role,
+            'user' => $user
+        ]);
+    }
+
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['delete','post']);
+        $user = $this->Users->get($id);
+
+        if($this->Users->delete($user)){
+            $this->Flash->success(__('Xóa '.$user->u_name.' thành công'));
+            return $this->redirect(['action'=>'index']);
+        }else{
+            $this->Flash->error(__('Xóa '.$user->u_name.' chưa thành công. Hãy thử lại'));
+        }
     }
     public function verification($token)
     {

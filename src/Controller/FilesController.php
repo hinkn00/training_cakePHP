@@ -12,6 +12,7 @@ class FilesController extends AppController{
         parent::initialize();
         $this->loadModel('Products');
         $this->loadModel('Orders');
+        $this->loadModel('Users');
         $this->viewBuilder()->setLayout('client');
     }
     public function index()
@@ -49,6 +50,7 @@ class FilesController extends AppController{
             $order->id_user = $this->Auth->User('id');
             $order->id_product = $id;
             $order->quantity = $this->request->getData('quantity');
+            $order->o_status = 0;
             $order->create_at = date('Y-m-d');
             if($orderTable->save($order)){
                 $this->Flash->success('Đặt hàng thành công');
@@ -70,9 +72,10 @@ class FilesController extends AppController{
         //     return $this->redirect(['action'=>'index']);
         // }
 
-        $this->request->allowMethod(['post','delete']);
+        // $this->request->allowMethod(['post','delete']);
         $order = $this->Orders->get($id);
-        if($this->Orders->delete($order)){
+        $order->o_status = 3;
+        if($this->Orders->save($order)){
             $this->Flash->success(__('Xóa đơn hàng thành công'));
             return $this->redirect(['action'=>'listOrder']);
         }else{
@@ -84,8 +87,9 @@ class FilesController extends AppController{
         if($this->Auth->user()){
             $orders = $this->Orders->find();
             $products = $this->Products->find();
+            $users = $this->Users->find();
 
-            $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products]);
+            $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products,'users'=>$users]);
         } else{
             return $this->redirect(['controller'=>'Users','action'=>'login']);
         }

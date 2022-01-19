@@ -15,6 +15,7 @@
             <th><?= $this->Paginator->sort('Tên sản phẩm')?></th>
             <th><?=$this->Paginator->sort('Giá sản phẩm')?></th>
             <th><?=$this->Paginator->sort('Số lượng')?></th>
+            <th><?=$this->Paginator->sort('Tình trạng')?></th>
             <th><?= $this->Paginator->sort('Người đặt')?></th>
             <th><?=$this->Paginator->sort('Ngày tạo')?></th>
             <th width="160">Khác</th>
@@ -24,28 +25,54 @@
         <?php
             foreach($orders as $order):
         ?>
-        <tr>
-            <?php foreach($products as $product):?>
-                <?php if($product->id == $order->id_product):?>
-                    <td><img src="../upload/products/<?= $product->p_image?>" width="150" alt=""></td>
-                    <td><?= $product->p_name ?></td>
-                    <td><?= $product->p_price ?></td>
+        <?php if($order->id_user == $_SESSION['Auth']['User']['id']):?>
+            <tr>
+                <?php foreach($products as $product):?>
+                    <?php if($product->id == $order->id_product):?>
+                        <td><img src="../upload/products/<?= $product->p_image?>" width="150" alt=""></td>
+                        <td><?= $product->p_name ?></td>
+                        <td><?= $product->p_price ?></td>
+                    <?php endif?>
+                <?php endforeach?>
+                <td><?= $order->quantity ?></td>
+                <td>
+                    <?php switch($order->o_status){
+                            case 0:
+                                echo "Chưa xử lý";
+                                break;
+                            case 1:
+                                echo "Đang giao";
+                                break;
+                            case 2:
+                                echo "Đã giao";
+                                break;
+                            case 3:
+                                echo "Đã hủy";
+                                break;
+                            default: 
+                                echo "Chưa xử lý";
+                                break;
+                        ?>
+                    <?php }?>
+                </td>
+                <?php foreach($users as $user):?>
+                    <?php if($user->id == $order->id_user && $_SESSION['Auth']['User']['id']==$order->id_user):?>
+                        <td><?= $user->u_name ?></td>
+                    <?php endif?>
+                <?php endforeach?>
+                <?php if($order->create_at == null):?>
+                    <td></td>
+                <?php else:?>
+                    <td><?= $order->create_at->format('Y-m-d') ?></td>
                 <?php endif?>
-            <?php endforeach?>
-            <td><?= $order->quantity ?></td>
-            <?php if($_SESSION['Auth']['User']['id'] == $order->id_user):?>
-                <td><?= $_SESSION['Auth']['User']['u_name'] ?></td>
-            <?php endif?>
-            <?php if($order->create_at == null):?>
-                <td></td>
-            <?php else:?>
-                <td><?= $order->create_at->format('Y-m-d') ?></td>
-            <?php endif?>
-            <td>
-                <!-- <a href=<?php //echo $this->URL->build(array('controller'=>'Files','action' => 'edit', $order->id))?> class="btn btn-warning">Sửa</a> -->
-                <?= $this->Form->postLink(__('Xóa'), ['action' => 'delete', $order->id], ['confirm' => __('Bạn có muốn xóa sản phẩm "{0}" không?', $order->id), 'class' => 'btn btn-danger']) ?>
-            </td>
-        </tr>
+                <?php if($order->o_status != 3):?>
+                    <td>
+                        <!-- <a href=<?php //echo $this->URL->build(array('controller'=>'Files','action' => 'edit', $order->id))?> class="btn btn-warning">Sửa</a> -->
+                        <?= $this->Form->postLink(__('Hủy'), ['action' => 'delete', $order->id], ['confirm' => __('Bạn có muốn hủy đơn hàng này không?'), 'class' => 'btn btn-danger']) ?>
+                    </td>
+                <?php endif?>
+            </tr>
+        <?php endif?>
         <?php
             endforeach;
         ?>

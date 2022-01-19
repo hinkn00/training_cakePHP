@@ -39,17 +39,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Trang chủ</span></a>
+            <a href="<?= $this->Url->build('/admin') ?>"><span>Admin</span></a>
         </div>
         <div class="top-nav-links">
         <?php 
             if(!empty($_SESSION['Auth']['User'])):
         ?>
-        <?= $this->HTML->Link('Danh sách đã đặt',['controller'=>'Files','action'=>'listOrder'])?>
+        <?= $this->HTML->Link('Quản lý đơn hàng',['controller'=>'Orders','action'=>'index'])?>
+        <?= $this->HTML->Link('Quản lý Users',['controller'=>'Users','action'=>'index'])?>
         <?= $this->HTML->Link('Đăng xuất',['controller'=>'Users','action'=>'logout'])?>
-        <?php else:?>
-        <?= $this->HTML->Link('Đăng ký',['controller'=>'Users','action'=>'register'])?>
-        <?= $this->HTML->Link('Đăng nhập',['controller'=>'Users','action'=>'login'])?>
+        <?php //else:?>
+            <?php //echo $this->HTML->Link('Đăng ký',['controller'=>'Users','action'=>'register'])?>
+            <?php //echo $this->HTML->Link('Đăng nhập',['controller'=>'Users','action'=>'login'])?>
         <?php endif;?>
         </div>
     </nav>

@@ -40,9 +40,8 @@ class UsersController extends AppController{
     }
     public function logout()
     {
-        // return $this->redirect($this->Auth->logout());
-        session_destroy();
-        return $this->redirect(['action'=>'login']);
+        // session_destroy();
+        return $this->redirect($this->Auth->logout());
     }
     public function add()
     {
@@ -61,6 +60,7 @@ class UsersController extends AppController{
             $user->u_email = $yEmail;
             $user->u_password = md5($yPassword);//$hasher->hash($yPassword);
             $user->u_token = $yToken;
+            $user->role = 0;
             $user->created_at = date("Y-m-d");
             $user->updated_at = date("Y-m-d");
 

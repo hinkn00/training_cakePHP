@@ -94,12 +94,24 @@ return static function (RouteBuilder $routes) {
         // have the `'prefix' => 'Admin'` route element added that
         // will be required when generating URLs for these routes
         $routes->connect('/', ['controller' => 'Products', 'action' => 'index']);
-        $routes->connect('admin/products', ['controller' => 'Products', 'action' => 'index']);
-        $routes->connect('admin/products/add', ['controller' => 'Products', 'action' => 'add']);
-        $routes->connect('admin/products/edit', ['controller' => 'Products', 'action' => 'edit']);
-        $routes->connect('admin/products/delete', ['controller' => 'Products', 'action' => 'delete']);
-        $routes->connect('admin/products/search', ['controller' => 'Products', 'action' => 'search']);
-        $routes->connect('admin/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
+        $routes->connect('/products', ['controller' => 'Products', 'action' => 'index']);
+        $routes->connect('/products/add', ['controller' => 'Products', 'action' => 'add']);
+        $routes->connect('/products/edit', ['controller' => 'Products', 'action' => 'edit']);
+        $routes->connect('/products/delete', ['controller' => 'Products', 'action' => 'delete']);
+        $routes->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
+        $routes->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
+        
+        $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $routes->connect('/users', ['controller' => 'Users', 'action' => 'index']);
+        $routes->connect('/users/edit', ['controller' => 'Users', 'action' => 'edit']);
+        $routes->connect('/users/delete', ['controller' => 'Users', 'action' => 'delete']);
+
+        $routes->connect('/orders', ['controller' => 'Orders', 'action' => 'index']);
+        $routes->connect('/orders/create', ['controller' => 'Orders', 'action' => 'add']);
+        $routes->connect('/orders/edit', ['controller' => 'Orders', 'action' => 'edit']);
+        $routes->connect('/orders/delete', ['controller' => 'Orders', 'action' => 'delete']);
+
+
         $routes->fallbacks(DashedRoute::class);
     });
     /*

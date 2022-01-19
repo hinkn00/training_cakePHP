@@ -33,6 +33,7 @@
                         echo $this->Form->Button('Đăng ký',['class'=>'btn btn-primary']);
                         echo $this->Html->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-success ml-3']);
                     ?>
+                    <a onclick="window.history.go(-1);" class="btn btn-warning ml-3">Quay lại</a>
                 </div>
                 <?php
                     echo $this->Form->end();
