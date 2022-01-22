@@ -11,6 +11,11 @@ use Cake\Utility\Security;
 use Cake\ORM\TableRegistry;
 use Cake\Event\EventInterface;
 class UsersController extends AppController{
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->viewBuilder()->setLayout('admin');
+    }
     public function index()
     {
         $this->paginate = [

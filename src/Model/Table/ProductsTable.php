@@ -55,16 +55,17 @@ class ProductsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('p_name')
-            ->maxLength('p_name', 255)
+            ->scalar('p_name')            
+            ->maxLength('p_name', 255,'Nhập tối đa 255 ký tự')
+            ->minLength('p_name',10,'Nhập ít nhất 10 ký tự')
             ->requirePresence('p_name', 'create')
             ->notEmptyString('p_name');
 
         $validator
             ->scalar('p_detail')
             ->maxLength('p_detail', 255)
-            ->requirePresence('p_detail', 'create')
-            ->notEmptyString('p_detail');
+            ->requirePresence('p_detail','create')
+            ->notEmptyString('p_detail','Vui lòng nhập mô tả');
 
         $validator
             ->integer('p_price')
@@ -75,7 +76,7 @@ class ProductsTable extends Table
             ->scalar('p_image')
             ->maxLength('p_image', 255)
             ->requirePresence('p_image', 'create')
-            ->notEmptyFile('p_image');
+            ->notEmptyFile('p_image','Vui lòng nhập file có định dạng png||jpg');
 
         $validator
             ->integer('p_status')
