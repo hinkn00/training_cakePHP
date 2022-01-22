@@ -8,6 +8,7 @@ class ProductsController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
+        $this->viewBuilder()->setLayout('admin');
         if($this->Auth->user('role') != 1){
             return $this->redirect('/');
         }
@@ -16,7 +17,7 @@ class ProductsController extends AppController
  public function index()
  {
     $this->paginate = [
-        'limit' => '3',
+        'limit' => '5',
     ];
     $products = $this->paginate($this->Products->find('all'));
     $this->set(['products'=>$products, 'title'=>'Quản lý sản phẩm']);
@@ -33,7 +34,7 @@ class ProductsController extends AppController
             $ex = substr(strrchr($name,"."),1);
             $newNames = time()."_".$name;
             // exit($newNames);
-            $path = "upload/products/".$newNames;
+            $path = "img/upload/products/".$newNames;
             $product->p_image = $newNames;
             move_uploaded_file($tmp, WWW_ROOT.$path);
         }
@@ -54,7 +55,7 @@ class ProductsController extends AppController
         $product = $this->Products->patchEntity($product, $this->request->getData());
         if(!$product->getErrors){  
             if($product->p_image){
-                unlink(WWW_ROOT."upload/products/".$product->p_image);
+                unlink(WWW_ROOT."img/upload/products/".$product->p_image);
             }
             $image = $this->request->getData('file');
             $tmp = $image->getStream()->getMetadata('uri'); // lấy tpm_name
@@ -62,7 +63,7 @@ class ProductsController extends AppController
             $ex = substr(strrchr($name,"."),1);
             $newNames = time()."_".$name;
             // exit($newNames);
-            $path = "upload/products/".$newNames;
+            $path = "img/upload/products/".$newNames;
             $product->p_image = $newNames;
             move_uploaded_file($tmp, WWW_ROOT.$path);
         }

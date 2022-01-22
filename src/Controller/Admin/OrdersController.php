@@ -10,10 +10,14 @@ class OrdersController extends AppController{
         $this->loadModel('Products');
         $this->loadModel('Orders');
         $this->loadModel('Users');
+        $this->viewBuilder()->setLayout('admin');
     }
     public function index()
     {
-        $orders = $this->Orders->find();
+        $this->paginate = [
+            'limit' => '5',
+        ];
+        $orders = $this->paginate($this->Orders->find('all'));
         $products = $this->Products->find();
         $users = $this->Users->find();
 

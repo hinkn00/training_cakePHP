@@ -1,55 +1,55 @@
-<div class="row">
-    <div class="col-md-6 offset-md-4">
-    <div class="card">
-            <div class="card-header">
-                <h1>Sửa sản phẩm <?= $name ?></h1>
-            </div>
-            <div class="card-body">
-                <?= $this->Form->create($product,['id'=>'frmEdit', 'type'=>'file'])?>
-                <input type="hidden" name="_method" value="PUT" />
-                <div class="form-group">
-                    <?php echo $this->Form->label('Name'); ?>
-                    <?php echo $this->Form->text('p_name',['class'=>'form-control','value'=>$name]); ?>
-                </div>
-                <div class="form-group">
-                    <?php echo $this->Form->label('Chi tiết sản phẩm'); ?>
-                    <?php echo $this->Form->textarea('p_detail', ['class'=>'form-control','value'=>$detail]); ?>
-                </div>
-                <div class="form-group">
-                    <?php echo $this->Form->label('Giá sản phẩm'); ?>
-                    <?php echo $this->Form->text('p_price', ['class'=>'form-control', 'value'=> $price]); ?>
-                </div>
-                <div class="form-group">
-                    <?php echo $this->Form->label('Trạng thái'); ?>
-                    <?php echo $this->Form->select('p_status', [1=>"Hiện", 0=>'Ẩn'], [
-                        'empty' => '(Chọn trạng thái)'              
-                    ]); ?>
-                </div>
-
-                <div class="form-group" style="margin: 15px 0">
-                    <h3><strong>Ảnh hiện tại</strong></h3>
-                    <img src="../upload/products/<?= $image?>" width="350">
-                </div>
-                <div class="form-group">
-                    <?php echo $this->Form->label('Thêm ảnh'); ?>
-                    <?php echo $this->Form->file('file',['class'=>'form-control']); ?>
-                </div>
-                <?php echo $this->Form->Button('Cập nhật sản phẩm',['class'=>'btn btn-primary']); ?>
-                <?php echo $this->Html->link('Quay lại', array('controller' => 'products', 'action' => 'index', 'class'=>'btn btn-success')); ?>
-                <?= $this->Form->end()?>
-            </div>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Sửa sản phẩm: <small><?= $name?></small></h3>
         </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <?= $this->Form->create($product,['type'=>'file', 'id'=>'frmEdit'])?>
+            <div class="form-group">
+                <?php echo $this->Form->label('Tên sản phẩm'); ?>
+                <?php echo $this->Form->text('p_name',['class'=>'form-control','required'=>false]); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label('Mô tả của sản phẩm'); ?>
+                <?php echo $this->Form->textarea('p_detail', ['class'=>'form-control','required'=>false]); ?>
+                
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label('Giá sản phẩm'); ?>
+                <?php echo $this->Form->text('p_price', ['class'=>'form-control','required'=>false]); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label('Trạng thái'); ?>
+                <?php echo $this->Form->select('p_status', [1=>"Hiện", 0=>'Ẩn'], [
+                    'empty' => '(Chọn trạng thái)',
+                    'required'=>false             
+                    ]); ?>
+            </div>
+            <div class="form-group" style="margin: 15px 0">
+                <h3><strong>Ảnh hiện tại</strong></h3>
+                <?= $this->Html->image('upload/products/'.$product->p_image, ['alt' => 'CakePHP','width'=>'150']);?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label('Thêm ảnh'); ?>
+                <?php echo $this->Form->file('file',['class'=>'form-control']); ?>
+            </div>
+                <div class="pull-right">
+                    <?php echo $this->Form->Button('Cập nhật sản phẩm',['class'=>'btn btn-primary']); ?>
+                    <?php echo $this->Html->link('Quay lại', array('controller' => 'products', 'action' => 'index'),['class'=>'btn btn-warning']); ?>
+                </div>
+            <?= $this->Form->end()?>
+        </div>
+        <!-- /.box-body -->
     </div>
-</div>
-
+</section>
 <script>
     $().ready(function(){
-
         $('#frmEdit').validate({
             onfocusout: false,
             onkeyup: false,
             onclick: false,
-
+            ignore: [],
             rules:{
                 "p_name" : {
                     required: true,
@@ -79,7 +79,7 @@
                     maxlength: "Tên có độ dài nhiều nhất 50 ký tự"
                 },
                 "p_detail" : {
-                    required: "Vui lòng viết chi tiết sản phẩm",
+                    required: "Vui lòng viết mô tả sản phẩm",
                 },
                 "p_price" : {
                     required: "Vui lòng nhập giá",
@@ -98,6 +98,11 @@
             },
         })
     })
+</script>
+<script>
+  $(function () {
+    CKEDITOR.replace('p_detail')
+  })
 </script>
 <style>
     .error{
