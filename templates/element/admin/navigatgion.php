@@ -1,7 +1,7 @@
 <!-- sidebar menu: : style can be found in sidebar.less -->
 <ul class="sidebar-menu" data-widget="tree">
-   <li class="header">MAIN NAVIGATION</li>
-   <li class="active treeview">
+   <li class="header">Menu</li>
+   <li class="active">
       <a href="#">
       <i class="fa fa-dashboard"></i> <span>Dashboard</span>
       </a>

@@ -29,7 +29,7 @@
             <tr>
                 <?php foreach($products as $product):?>
                     <?php if($product->id == $order->id_product):?>
-                        <td><img src="../upload/products/<?= $product->p_image?>" width="150" alt=""></td>
+                        <td><?= $this->Html->image('upload/products/'.$product->p_image, ['alt' => 'CakePHP','width'=>'150']);?></td>
                         <td><?= $product->p_name ?></td>
                         <td><?= $product->p_price ?></td>
                     <?php endif?>

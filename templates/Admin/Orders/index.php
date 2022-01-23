@@ -21,7 +21,7 @@
                         </div>
                     </form>
                 </div>
-                <?= $this->Html->link('Thêm đơn hàng',['controller'=>'Users','action'=>'add'],['class'=>'btn btn-info pull-right'])?>
+                <?= $this->Html->link('Thêm đơn hàng',['controller'=>'Orders','action'=>'add'],['class'=>'btn btn-info pull-right'])?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -99,7 +99,7 @@
                         'last' => '<li class="page-item"><a class="page-link" href="{{url}}">&raquo;</a></li>',
                         'prevActive' => '<li class="page-item"><a class="page-link" href="{{url}}">&lt;</a></li>',
                         'nextActive' => '<li class="page-item"><a class="page-link" href="{{url}}">&gt;</a></li>',
-                        'nextDisabled' => '<li class="page-item"><a></a></li>'
+                        'nextDisabled' => '<li class="page-item"></li>'
                     ]);
                     ?>
                 <ul class="pagination" style="width:100%; display:flex; justify-content: flex-end">

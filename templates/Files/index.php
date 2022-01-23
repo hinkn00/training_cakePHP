@@ -16,7 +16,7 @@
         'id' => 'frmOrder'
       ])?>
         <div class="card" style="margin-bottom: 15px;">
-            <img class="card-img-top" height="150px" width="150px" src="./upload/products/<?= $product->p_image?>" alt="Card image cap">
+          <?= $this->Html->image('upload/products/'.$product->p_image, ['alt' => 'CakePHP','width'=>'150']);?>
           <div class="card-body">
             <input type="hidden" name="id" value="<?=$product->id?>">
             <h5 class="card-title"><?=$product->p_name?></h5>

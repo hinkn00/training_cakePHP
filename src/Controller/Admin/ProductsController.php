@@ -9,9 +9,6 @@ class ProductsController extends AppController
     {
         parent::beforeFilter($event);
         $this->viewBuilder()->setLayout('admin');
-        if($this->Auth->user('role') != 1){
-            return $this->redirect('/');
-        }
 
     }
  public function index()
