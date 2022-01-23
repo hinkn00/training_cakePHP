@@ -17,7 +17,7 @@
                 <div class="box-tools" style=" width:100%; display:flex; justify-content: center">
                     <form action="<?php echo $this->Url->build(['action'=>'search'])?>" method="get">
                         <div class="input-group input-group-sm" style="width: 200px;">
-                            <input type="text" name="q" class="form-control pull-right" id="q" placeholder="Nhập tên sản phẩm...">
+                            <input type="text" name="q" class="form-control pull-right" id="q" placeholder="Nhập tên để tìm kiếm...">
                             <div class="input-group-btn">
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
@@ -81,7 +81,7 @@
                         'last' => '<li class="page-item"><a class="page-link" href="{{url}}">&raquo;</a></li>',
                         'prevActive' => '<li class="page-item"><a class="page-link" href="{{url}}">&lt;</a></li>',
                         'nextActive' => '<li class="page-item"><a class="page-link" href="{{url}}">&gt;</a></li>',
-                        'nextDisabled' => '<li class="page-item"><a></a></li>'
+                        'nextDisabled' => '<li class="page-item"></li>'
                     ]);
                     ?>
                 <ul class="pagination" style="width:100%; display:flex; justify-content: flex-end">

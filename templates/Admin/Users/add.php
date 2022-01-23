@@ -1,48 +1,61 @@
-<div class="row">
-    <div class="col-md-6 offset-md-4">
-        <?= $this->Flash->render() ?>
-        <div id="message"></div>
-        <div class="card">
-            <h3 class="card-header">Đăng ký tài khoản</h3>
-            <div class="card-body">
-                <?php
-                    echo $this->Form->create(null, ['id'=>'frmRegister', 'onsubmit'=>'return false']);
-                ?>
-                <div class="form-group">
-                    <?php 
-                        echo $this->Form->control('Họ tên người dùng', ['name'=>'name', 'id'=>'yName','class'=>'form-control','autofocus']);
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php 
-                        echo $this->Form->control('Email', ['name'=>'email', 'id'=>'yEmail', 'class'=>'form-control'])
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php 
-                        echo $this->Form->control('Mật khẩu', ['name'=>'password', 'type' => 'password', 'id'=>'yPassword', 'class'=>'form-control'])
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php 
-                        echo $this->Form->control('Nhập lại mật khẩu', ['name'=>'re-password', 'type' => 'password', 'id'=>'yRePassword', 'class'=>'form-control'])
-                    ?>
-                </div>
-                <div class="text-center">
-                    <?php
-                        echo $this->Form->Button('Đăng ký',['class'=>'btn btn-primary']);
-                        echo $this->Html->link("Đăng nhập", ['action'=>'login'],['class'=>'btn btn-success ml-3']);
-                    ?>
-                    <a onclick="window.history.go(-1);" class="btn btn-warning ml-3">Quay lại</a>
-                </div>
-                <?php
-                    echo $this->Form->end();
-                ?>
-            </div>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm người dùng</h3>
         </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <?= $this->Form->create(null,['type'=>'file', 'id'=>'frmRegister'])?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?php 
+                            echo $this->Form->control('u_name', [
+                                'type'=>'text',
+                                'class'=>'form-control',
+                                'autofocus',
+                                'required'=>false,
+                                'label'=>'Họ và tên'
+                            ]);
+                        ?>
+                        <?php 
+                            echo $this->Form->control('u_email', [
+                                'type'=>'text',
+                                'class'=>'form-control',
+                                'required'=>false,
+                                'label'=>'Email'
+                            ]);
+                        ?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?php 
+                            echo $this->Form->control('u_password', [
+                                'type'=>'password',
+                                'class'=>'form-control',
+                                'required'=>false,
+                                'label' => 'Mật khẩu'
+                            ]); 
+                        ?>
+                        <?php 
+                            echo $this->Form->control('re_password', [
+                                'type'=>'password',
+                                'class'=>'form-control',
+                                'required'=>false,
+                                'label' => 'Nhập lại mật khẩu'
+                            ]); 
+                        ?>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <?php echo $this->Form->Button('Thêm sản phẩm',['class'=>'btn btn-primary']); ?>
+                    <?php echo $this->Html->link('Quay lại', array('controller' => 'users', 'action' => 'index'),['class'=>'btn btn-warning']); ?>
+                </div>
+            <?= $this->Form->end()?>
+        </div>
+        <!-- /.box-body -->
     </div>
-</div>
-
+</section>
 <script>
     $().ready(function(){
         $.validator.addMethod("validatePassword", function (value, element) {
@@ -54,41 +67,41 @@
             onclick: false,
 
             rules:{
-                "name" : {
+                "u_name" : {
                     required: true,
                     minlength: 2,
                     maxlength: 50
                 },
-                "email" : {
+                "u_email" : {
                     required: true,
                     email: true,
                     maxlength: 50,
                 },
-                "password" : {
+                "u_password" : {
                     required: true,
                     validatePassword: true,
                 },
-                "re-password": {
+                "re_password": {
                     required: true,
-                    equalTo: "#yPassword"
+                    equalTo: "#u-password"
                 }
             },
 
             messages: {
-                "name" : {
+                "u_name" : {
                     required: "Vui lòng nhập họ tên",
                     minlength: "Tên có độ dài tối thiểu 2 ký tự",
                     maxlength: "Tên có độ dài nhiều nhất 50 ký tự"
                 },
-                "email" : {
+                "u_email" : {
                     required: "Vui lòng nhập email",
                     email: 'Định dạng email không hợp lệ',
                     maxlength: "Email có độ dài nhiều nhất 50 ký tự"
                 },
-                "password" : {
+                "u_password" : {
                     required: "Vui lòng nhập mật khẩu",
                 },
-                "re-password": {
+                "re_password": {
                     required: "Vui lòng nhập lại mật khẩu",
                     equalTo: "Mật khẩu nhập lại không trùng khớp"
                 }

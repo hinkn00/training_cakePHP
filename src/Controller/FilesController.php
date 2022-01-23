@@ -84,7 +84,7 @@ class FilesController extends AppController{
     }
     public function listOrder()
     {
-        if($this->Auth->user()){
+        if(!empty($this->Auth)){
             $orders = $this->Orders->find();
             $products = $this->Products->find();
             $users = $this->Users->find();

@@ -1,15 +1,15 @@
-<div class="row">
-    <div class="col-md-6 offset-md-4">
-    <div class="card">
-            <div class="card-header">
-                <h1>Sửa đơn hàng có mã <?= $order->id ?></h1>
-            </div>
-            <div class="card-body">
-                <?= $this->Form->create($order,['id'=>'frmEdit', 'type'=>'file'])?>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Sửa đơn hàng có mã <?= $order->id ?></h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <?= $this->Form->create($order,['id'=>'frmEdit', 'type'=>'file'])?>
                 <input type="hidden" name="_method" value="PUT" />
                 <div class="form-group">
                     <?php echo $this->Form->label('Số lượng'); ?>
-                    <?php echo $this->Form->number('quantity',['class'=>'form-control','value'=>$quantity]); ?>
+                    <?php echo $this->Form->number('quantity',['class'=>'form-control','value'=>$quantity,'style'=>'width:60px']); ?>
                 </div>
                 <div class="form-group">
                     <?php echo $this->Form->label('Trạng thái'); ?>
@@ -18,9 +18,9 @@
                     ]); ?>
                 </div>
                 <?php echo $this->Form->Button('Cập nhật sản phẩm',['class'=>'btn btn-primary']); ?>
-                <?php echo $this->Html->link('Quay lại', array('controller' => 'Orders', 'action' => 'index', 'class'=>'btn btn-success')); ?>
+                <?php echo $this->Html->link('Quay lại', array('controller' => 'Orders', 'action' => 'index'),['class'=>'btn btn-warning']); ?>
                 <?= $this->Form->end()?>
-            </div>
         </div>
+        <!-- /.box-body -->
     </div>
-</div>
+</section>

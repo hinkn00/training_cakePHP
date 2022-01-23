@@ -56,7 +56,8 @@ class UsersTable extends Table
 
         $validator
             ->scalar('u_name')
-            ->maxLength('u_name', 50)
+            ->maxLength('u_name', 50, 'Nhiều nhất 50 ký tự trong tên')
+            ->minLength('u_name', 2, 'Ít nhất phải 2 ký tự trong tên')
             ->requirePresence('u_name', 'create')
             ->notEmptyString('u_name');
 

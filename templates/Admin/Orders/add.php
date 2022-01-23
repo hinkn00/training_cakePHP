@@ -1,11 +1,11 @@
-<div class="row">
-    <div class="col-md-6 offset-md-4">
-    <div class="card">
-            <div class="card-header">
-                <h1>Thêm đơn hàng</h1>
-            </div>
-            <div class="card-body">
-                <?= $this->Form->create($order,['id'=>'frmEdit', 'type'=>'file'])?>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm đơn hàng</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <?= $this->Form->create($order,['id'=>'frmEdit', 'type'=>'file'])?>
                 <div class="form-group">
                     <?php echo $this->Form->label('Sản phẩm'); ?>
                     <select name="id_product" id="id_product" style = "fone-size: 20px">
@@ -24,12 +24,14 @@
                 </div>
                 <div class="form-group">
                     <?php echo $this->Form->label('Số lượng'); ?>
-                    <?php echo $this->Form->number('quantity',['class'=>'form-control','min'=>1, 'value'=>'1','style'=>'font-size:20px']); ?>
+                    <?php echo $this->Form->number('quantity',['class'=>'form-control','min'=>1, 'value'=>'1','style'=>'font-size:20px; width:50px']); ?>
                 </div>
-                <?php echo $this->Form->Button('Thêm đơn hàng',['class'=>'btn btn-primary']); ?>
-                <?php echo $this->Html->link('Quay lại', array('controller' => 'Orders', 'action' => 'index', 'class'=>'btn btn-success')); ?>
-                <?= $this->Form->end()?>
-            </div>
+                <div style="float-right">
+                    <?php echo $this->Form->Button('Thêm đơn hàng',['class'=>'btn btn-primary']); ?>
+                    <?php echo $this->Html->link('Quay lại', array('controller' => 'Orders', 'action' => 'index'),['class'=>'btn btn-warning']); ?>
+                </div>
+            <?= $this->Form->end()?>
         </div>
+        <!-- /.box-body -->
     </div>
-</div>
+</section>

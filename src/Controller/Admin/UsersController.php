@@ -63,9 +63,9 @@ class UsersController extends AppController{
             $user = $userTable->newEmptyEntity();
 
             $hasher = new DefaultPassWordHasher();
-            $yName = $this->request->getData('name');
-            $yEmail = $this->request->getData('email');
-            $yPassword = $this->request->getData('password');//convert sang hash bcrypt
+            $yName = $this->request->getData('u_name');
+            $yEmail = $this->request->getData('u_email');
+            $yPassword = $this->request->getData('u_password');//convert sang hash bcrypt
             $yToken = Security::hash(Security::randomBytes(32));
 
             $user->u_name = $yName;
