@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 use Cake\Utility\Security;
 use Cake\Event\EventInterface;
+use Cake\ORM\Locator\LocatorAwareTrait;
 class ProductsController extends AppController
 {
 
