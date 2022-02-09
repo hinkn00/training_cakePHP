@@ -14,7 +14,7 @@ class UsersController extends AppController{
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->viewBuilder()->setLayout('auth/login_admin');
+        $this->viewBuilder()->setLayout('admin');
     }
     public function index()
     {
@@ -28,6 +28,7 @@ class UsersController extends AppController{
     }
     public function login()
     {
+        $this->viewBuilder()->setLayout('auth/login_admin');
         if($this->request->is('post')){
             $user = $this->Auth->identify();
             if($user){
