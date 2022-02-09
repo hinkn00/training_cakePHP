@@ -14,7 +14,7 @@ class UsersController extends AppController{
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->viewBuilder()->setLayout('admin');
+        $this->viewBuilder()->setLayout('auth/login_admin');
     }
     public function index()
     {

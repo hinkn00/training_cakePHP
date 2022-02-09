@@ -2,19 +2,19 @@
     <div class="col-md-4 offset-md-4">
         <?=$this->Flash->render()?>
         <div class="card">
-            <div class="card-header text-center"><h1>Đăng nhập</h1></div>
+        <div class="card-header text-center"><?= $this->Html->image('favpng_heart-favicon.png', ['alt' => 'Đăng nhập','width'=>'100']);?></div>
             <div class="card-body">
             <?php
                 echo $this->Form->create(null,['id'=>'frmLogin', 'onsubmit'=>'return false']);
             ?>
             <div class="form-group">
                 <?php 
-                    echo $this->Form->control('Email', ['name'=>'u_email', 'id'=>'yEmail', 'class'=>'form-control'])
+                    echo $this->Form->control('Email', ['name'=>'u_email', 'id'=>'yEmail', 'class'=>'form-control', 'placeholder'=>'Nhập email để đăng nhập'])
                 ?>
             </div>
             <div class="form-group">
                 <?php 
-                    echo $this->Form->control('Mật khẩu', ['name'=>'u_password', 'type' => 'password', 'id'=>'yPassword', 'class'=>'form-control'])
+                    echo $this->Form->control('Mật khẩu', ['name'=>'u_password', 'type' => 'password', 'id'=>'yPassword', 'class'=>'form-control','placeholder'=>'Nhập password để đăng nhập'])
                 ?>
             </div>
             <?php
