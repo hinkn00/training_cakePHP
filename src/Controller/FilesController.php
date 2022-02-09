@@ -83,8 +83,8 @@ class FilesController extends AppController{
         }
     }
     public function listOrder()
-    {
-        if(!empty($this->Auth)){
+    {  
+        if($this->Auth->User()){
             $orders = $this->Orders->find();
             $products = $this->Products->find();
             $users = $this->Users->find();
@@ -92,6 +92,7 @@ class FilesController extends AppController{
             $this->set(['title'=>'Danh sách đặt hàng', 'orders'=>$orders, 'products'=>$products,'users'=>$users]);
         } else{
             return $this->redirect(['controller'=>'Users','action'=>'login']);
+            exit;
         }
     }
     // public function download($id = null)
