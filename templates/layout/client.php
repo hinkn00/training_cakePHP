@@ -34,7 +34,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <hr>
-                        <a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'logout'])?>">Đăng xuất</a>
+                        <a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'users','action'=>'logout'])?>">Đăng xuất</a>
                     </div>
                 </div>
             <?php else:?>

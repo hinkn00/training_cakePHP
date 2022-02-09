@@ -45,32 +45,32 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        if ($this->request->getParam('prefix') === 'Admin') {
-            $this->loadComponent('Auth',[
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => ['username'=>'u_email','password'=>'u_password'],
-                        'scope' => ['verified'=> '1'],
-                        'userModel' => 'Users'
-                    ]
-                ],
-                // 'loginAction' => [
-                //     'controller' => 'Users',
-                //     'action' => 'login',
-                // ],
-                'loginRedirect' => [
-                    'controller' => 'Files',
-                    'action' => 'index'
-                ],
-                'logoutRedirect' => [
-                    'controller' => 'Users',
-                    'action' => 'login'
-                ],
-                // 'storage' => 'Session',
-                'authError' => 'Vui lòng đăng nhập trước khi truy cập',
-            ]);
-        }
-        
+        // if ($this->request->getParam('prefix') === 'Admin') {
+           
+        // }
+        $this->loadComponent('Auth',[
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username'=>'u_email','password'=>'u_password'],
+                    'scope' => ['verified'=> '1'],
+                    'userModel' => 'Users'
+                ]
+            ],
+            // 'loginAction' => [
+            //     'controller' => 'Users',
+            //     'action' => 'login',
+            // ],
+            'loginRedirect' => [
+                'controller' => 'Files',
+                'action' => 'list_order'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            // 'storage' => 'Session',
+            'authError' => 'Vui lòng đăng nhập trước khi truy cập',
+        ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -81,6 +81,6 @@ class AppController extends Controller
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        // $this->Auth->allow();
+        $this->Auth->allow();
     }
 }
