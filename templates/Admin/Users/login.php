@@ -2,7 +2,7 @@
     <div class="col-md-4 offset-md-4">
         <?=$this->Flash->render()?>
         <div class="card">
-        <div class="card-header text-center"><?= $this->Html->image('favpng_heart-favicon.png', ['alt' => 'Đăng nhập','width'=>'100']);?></div>
+        <div class="card-header text-center"><?= $this->Html->image('favpng_heart-favicon.png', ['alt' => 'Đăng nhập','width'=>'80', 'height'=>'80']);?></div>
             <div class="card-body">
             <?php
                 echo $this->Form->create(null,['id'=>'frmLogin', 'onsubmit'=>'return false']);
