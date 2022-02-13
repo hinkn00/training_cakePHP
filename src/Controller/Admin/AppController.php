@@ -47,8 +47,10 @@ class AppController extends Controller
         parent::beforeFilter($event);
         $this->Auth->allow([ 'logout']);    
         
-        if($this->roleUser() !== 1){
-            header('location: /'); exit();
+        if($this->Auth->User()){
+            if($this->roleUser() !== 1){
+                header('location: /'); exit();
+            }
         }
     }
 

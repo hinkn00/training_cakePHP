@@ -26,6 +26,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Files','action'=>'listOrder'])?>">Sản phẩm đã đặt</a>
                 </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle mr-sm-3 mt-sm-2" style="cursor: pointer" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Danh mục
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <?php foreach($categories as $category):?>
+                                <a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'categories','action'=>'index','slug'=>$category->slug])?>"><?= $category->name?></a>
+                            <?php endforeach;?>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <?php if(isset($_SESSION['Auth']['User'])):?>
                 <div class="dropdown">
