@@ -72,6 +72,8 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/order', ['controller' => 'Files', 'action' => 'upload']);
         $builder->connect('/list/order', ['controller' => 'Files', 'action' => 'listOrder']);
         $builder->connect('/list/order/delete', ['controller' => 'Files', 'action' => 'delete']);
+        
+        $builder->connect('/category/{slug}', ['controller' => 'Categories', 'action' => 'index']);
         /*
          * Connect catchall routes for all controllers.
          *
@@ -100,6 +102,11 @@ return static function (RouteBuilder $routes) {
         $routes->connect('/products/delete', ['controller' => 'Products', 'action' => 'delete']);
         $routes->connect('/products/search', ['controller' => 'Products', 'action' => 'search']);
         $routes->connect('/products/delete-selected', ['controller' => 'Products', 'action' => 'deleteSelected']);
+
+        $routes->connect('/categories', ['controller' => 'Categories', 'action' => 'index']);
+        $routes->connect('/categories/edit', 
+            ['controller' => 'Categories', 'action' => 'edit'],
+        );
         
         $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
         $routes->connect('/users', ['controller' => 'Users', 'action' => 'index']);

@@ -7,7 +7,7 @@
       </a>
    </li>
    <li>
-      <a href="<?= $this->Url->build(['controller'=>'Products','action'=>'index'])?>">
+      <a href="<?= $this->Url->build(['controller'=>'Categories','action'=>'index'])?>">
       <i class="fa fa-th"></i> <span>Quản lý danh mục</span>
       </a>
    </li>

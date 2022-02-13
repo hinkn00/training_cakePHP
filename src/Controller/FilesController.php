@@ -13,6 +13,9 @@ class FilesController extends AppController{
         $this->loadModel('Products');
         $this->loadModel('Orders');
         $this->loadModel('Users');
+        $this->loadModel('Categories');
+        $categories = $this->Categories->getAllCategory();
+        $this->set(compact('categories'));
         $this->viewBuilder()->setLayout('client');
     }
     public function index()
