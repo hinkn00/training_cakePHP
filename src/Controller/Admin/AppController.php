@@ -45,6 +45,17 @@ class AppController extends Controller
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $this->Auth->allow([ 'logout']);     
+        $this->Auth->allow([ 'logout']);    
+        
+        if($this->Auth->User()){
+            if($this->roleUser() !== 1){
+                header('location: /'); exit();
+            }
+        }
+    }
+
+    public function roleUser()
+    {
+        return $this->Auth->User('role');
     }
 }
