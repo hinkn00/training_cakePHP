@@ -4,9 +4,7 @@ namespace App\Model\Table;
 
 use App\Model\Table\CategoriesBaseTable;
 
-class CategoriesTable extends CategoriesBaseTable{
-    public $userTable = "categories";
-    public $name = "category";
+class CategoriesTable extends CategoriesBaseTable{   
 
     public function getAllCategory()
     {
@@ -15,5 +13,17 @@ class CategoriesTable extends CategoriesBaseTable{
         );
         $tmp = $this->find('all',$options);
         return $tmp;
+    }
+
+    public function getSlugOfCategory($slug)
+    {
+        $name = $this->getAlias();
+        $tmpData = $this->find("all", array(
+            'field' => '*',
+            'conditions' => array(
+                'category.slug =' => $slug
+            )
+        ))->first();
+        return $tmpData;
     }
 }

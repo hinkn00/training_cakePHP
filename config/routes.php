@@ -72,6 +72,8 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/order', ['controller' => 'Files', 'action' => 'upload']);
         $builder->connect('/list/order', ['controller' => 'Files', 'action' => 'listOrder']);
         $builder->connect('/list/order/delete', ['controller' => 'Files', 'action' => 'delete']);
+        
+        $builder->connect('/category/{slug}', ['controller' => 'Categories', 'action' => 'index']);
         /*
          * Connect catchall routes for all controllers.
          *
