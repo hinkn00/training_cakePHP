@@ -16,6 +16,7 @@ class CategoriesBaseTable extends Table
         $this->setTable('categories');
         $this->setAlias('category');
         // $this->setEntityClass('App\Model\Entity\Category');
-        // $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id');
+        $this->hasMany('Products')->setForeignKey('category_id');
     }
 }
