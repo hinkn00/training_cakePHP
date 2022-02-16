@@ -13,14 +13,16 @@ class ProductsController extends AppController
     }
     public function index()
     {
+        $category_lists = $this->Products->Categories->find('all');
         $this->paginate = [
             'limit' => '5',
         ];
         $products = $this->paginate($this->Products->find('all'));
-        $this->set(['products'=>$products, 'title'=>'Quản lý sản phẩm']);
+        $this->set(['products'=>$products, 'title'=>'Quản lý sản phẩm','categories'=>$category_lists]);
     }   
     public function add()
     {
+        $category_list = $this->Products->Categories->find('all');
         $product = $this->Products->newEmptyEntity();
         if($this->request->is('post')){
             $product = $this->Products->patchEntity($product, $this->request->getData());
@@ -36,6 +38,7 @@ class ProductsController extends AppController
                 move_uploaded_file($tmp, WWW_ROOT.$path);
             }
             $product->created_at = date('Y-m-d');
+            $product->category_id = $this->request->getData('category_id');
             if($this->Products->save($product)){
                 $this->Flash->success(__('Thêm sản phẩm thành công'));
             return $this->redirect(['action'=>'index']);
@@ -43,10 +46,11 @@ class ProductsController extends AppController
             $this->Flash->error(__('Thêm sản phẩm chưa thành công. Hãy thử lại'));
 
         }
-        $this->set(['title'=>'Thêm sản phẩm', 'product'=>$product]);
+        $this->set(['title'=>'Thêm sản phẩm', 'product'=>$product, 'categories'=>$category_list]);
     }
     public function edit($id = null)
     {
+        $category_lists = $this->Products->Categories->find('all');
         $product = $this->Products->get($id);
         if($this->request->is(array('post','put'))){
             $product = $this->Products->patchEntity($product, $this->request->getData());
@@ -64,6 +68,7 @@ class ProductsController extends AppController
                 $product->p_image = $newNames;
                 move_uploaded_file($tmp, WWW_ROOT.$path);
             }
+            $product->category_id = $this->request->getData('category_id');
             if($this->Products->save($product)){
                 $this->Flash->success(__('Sửa sản phẩm thành công'));
             return $this->redirect(['action'=>'index']);
@@ -79,6 +84,7 @@ class ProductsController extends AppController
             'status'  => $product->p_status,
             'created_at'  => $product->created_at,
             'product'=>$product,
+            'categories'=>$category_lists
         ));
     }
 
