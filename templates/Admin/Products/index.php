@@ -43,6 +43,7 @@
                             <th><?= $this->Paginator->sort('Ảnh sản phẩm')?></th>
                             <th><?= $this->Paginator->sort('Tên sản phẩm')?></th>
                             <th><?=$this->Paginator->sort('Chi tiết')?></th>
+                            <th><?=$this->Paginator->sort('Thể loại')?></th>
                             <th><?=$this->Paginator->sort('Giá sản phẩm')?></th>
                             <th><?=$this->Paginator->sort('Trạng thái')?></th>
                             <th><?=$this->Paginator->sort('Ngày tạo')?></th>
@@ -58,6 +59,11 @@
                             <td style="width:200px"><?= $this->Html->image('upload/products/'.$product->p_image, ['alt' => 'CakePHP','width'=>'150']);?></td>
                             <td><?= $product->p_name?></td>
                             <td><?= $product->p_detail?></td>
+                            <td>
+                                <?php foreach($categories as $cate){
+                                    echo ($product->category_id==$cate->id)?$cate->name:'';
+                                }?>
+                            </td>
                             <td><?= $product->p_price?></td>
                             <?php if($product->p_status == 1):?>
                             <td>

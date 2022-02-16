@@ -18,6 +18,15 @@
                 <?php echo $this->Form->text('p_price', ['class'=>'form-control','required'=>false]); ?>
             </div>
             <div class="form-group">
+                <?php echo $this->Form->label('Thể loại'); ?>
+                <select name="category_id" id="category_id">
+                    <option value="" disabled selected>Chọn thể loại</option>
+                    <?php foreach($categories as $cate):?>
+                        <option value="<?=$cate->id?>"><?= $cate->name?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+            <div class="form-group">
                 <?php echo $this->Form->label('Trạng thái'); ?>
                 <?php echo $this->Form->select('p_status', [1=>"Hiện", 0=>'Ẩn'], [
                     'empty' => '(Chọn trạng thái)',

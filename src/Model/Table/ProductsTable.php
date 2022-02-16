@@ -40,6 +40,8 @@ class ProductsTable extends Table
         $this->setTable('products');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Categories')->setJoinType('INNER');
     }
 
     /**
