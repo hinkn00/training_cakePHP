@@ -42,7 +42,9 @@ class AppController extends Controller
     public function initialize(): void
     {
         parent::initialize();
-
+        $this->loadModel('Categories');
+        $categories = $this->Categories->getAllCategory();
+        $this->set(compact('categories'));
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         // if ($this->request->getParam('prefix') === 'Admin') {
